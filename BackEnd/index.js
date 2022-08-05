@@ -10,6 +10,8 @@ const errorHandlerMiddleware = require("./middleware/error_handle");
 //Export MongoDB connect Module
 const connectDB = require("./DataBase/DataBaseConnetion");
 
+// app.use("/api/v1/user");
+
 // Not found Route Middleware
 app.use(notFound);
 // Custome Error Handler Middleware
