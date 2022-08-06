@@ -1,5 +1,10 @@
+import { Container } from "@mui/material";
 import React from "react";
 
 export default function AdminDetails() {
-  return <div>AdminDetails</div>;
+  return (
+    <>
+      <Container maxWidth="xs" sx={{ backgroundColor: "White" }}></Container>
+    </>
+  );
 }

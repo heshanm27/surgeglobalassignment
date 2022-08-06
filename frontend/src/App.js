@@ -1,3 +1,4 @@
+import { Box, useTheme } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import AdminDetails from "./Pages/AdminDetails";
@@ -7,6 +8,7 @@ import SignUp from "./Pages/SignUp";
 import UserDetails from "./Pages/UserDetails";
 
 function App() {
+  const theme = useTheme();
   return (
     <Routes>
       <Route path="/" element={<SignUp />} />
