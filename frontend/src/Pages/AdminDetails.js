@@ -21,8 +21,8 @@ import UserCard from "../Component/Cards/UserCard";
 export default function AdminDetails() {
   const data = {
     id: "U20001",
-    firstName: "sai",
-    lastName: "jan",
+    firstName: "Nimal",
+    lastName: "Perera",
     email: "example@example.com",
     dateOfBirth: "2000.12.12",
     mobile: "+94717083178",
