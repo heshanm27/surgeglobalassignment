@@ -11,12 +11,22 @@ import {
   Paper,
   Stack,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import React from "react";
 
 import SearchIcon from "@mui/icons-material/Search";
 import NoteCard from "../Component/Cards/NoteCard";
+import AddNotePopUpForm from "../Component/PopUpContent/AddNotePopUpForm";
+import CustomePopUp from "../Component/PopUp/CustomePopUp";
+import { useState } from "react";
 export default function UserDetails() {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   const data = [
     {
       title: "The Smooth Kiss",
@@ -46,8 +56,8 @@ export default function UserDetails() {
           <Grid container>
             <Grid item xs={12} sm={12}>
               <Paper sx={{ padding: { xs: 2, sm: 5 } }}>
-                <Grid container>
-                  <Grid item xs={12} sm={8}>
+                <Grid container spacing={5}>
+                  <Grid item xs={12} sm={8} style={{ textAlign: "center" }}>
                     <FormControl fullWidth variant="standard">
                       <InputLabel htmlFor="standard-adornment-search">
                         Search User
@@ -73,7 +83,10 @@ export default function UserDetails() {
                       justifyContent="center"
                       alignItems="center"
                     >
-                      <Button variant="contained"> Add Note</Button>
+                      <Button variant="contained" onClick={handleOpen}>
+                        {" "}
+                        Add Note
+                      </Button>
                     </Stack>
                   </Grid>
                 </Grid>
@@ -82,6 +95,9 @@ export default function UserDetails() {
 
             <Grid item xs={12} sm={12}>
               <Paper sx={{ padding: { xs: 2, sm: 5 }, mt: 5 }}>
+                <Typography color="primary" variant="h4" align="center">
+                  Notes{" "}
+                </Typography>
                 {data.map((item, index) => (
                   <NoteCard data={item} key={index} />
                 ))}
@@ -92,6 +108,7 @@ export default function UserDetails() {
                   justifyContent="center"
                   sx={{ mt: 5 }}
                 >
+                  {/**Pagination Component */}
                   <Pagination
                     size="small"
                     count={10}
@@ -103,6 +120,10 @@ export default function UserDetails() {
             </Grid>
           </Grid>
         </Stack>
+        {/**CusomePopup call with props */}
+        <CustomePopUp open={open} setOpen={setOpen} title={"Create new note"}>
+          <AddNotePopUpForm />
+        </CustomePopUp>
       </Container>
     </>
   );

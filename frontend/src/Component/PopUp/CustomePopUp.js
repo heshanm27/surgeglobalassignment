@@ -8,13 +8,12 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
-export default function CustomePopUp({ open, setOpen, children }) {
+export default function CustomePopUp({ open, setOpen, children, title }) {
   const theme = useTheme();
 
-  useEffect(() => {});
   const displaywraper = {
     padding: 10,
     position: "absolute",
@@ -34,13 +33,13 @@ export default function CustomePopUp({ open, setOpen, children }) {
     <Dialog
       open={open}
       onClose={() => setOpen(false)}
-      maxWidth="sm"
+      fullWidth
       sx={displaywraper}
     >
       <DialogTitle>
-        <div style={{ display: "flex", width: "500px" }}>
+        <Box sx={{ display: "flex", width: "300px" }}>
           <Typography varient="h6" component="div" style={{ flexGrow: "1" }}>
-            User Details
+            {title}
           </Typography>
           <IconButton
             color="primary"
@@ -50,7 +49,7 @@ export default function CustomePopUp({ open, setOpen, children }) {
           >
             <CloseIcon />
           </IconButton>
-        </div>
+        </Box>
       </DialogTitle>
       <DialogContent dividers>{children}</DialogContent>
     </Dialog>

@@ -65,7 +65,7 @@ export default function AdminDetails() {
       <Container maxWidth="lg" sx={{ backgroundColor: "White" }}>
         <Stack direction="row" sx={{ padding: { xs: 2, sm: 5 } }}>
           <Grid container justifyContent="center" alignItems="center">
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={12} sx={{ textAlign: "center" }}>
               <Paper sx={{ padding: { xs: 2, sm: 2 } }}>
                 <FormControl sx={{ width: "400px" }} variant="standard">
                   <InputLabel htmlFor="standard-adornment-password">
@@ -90,7 +90,7 @@ export default function AdminDetails() {
 
             <Grid item xs={12} sm={12}>
               <Paper sx={{ padding: { xs: 2, sm: 5 }, mt: 5 }}>
-                <Typography variant="h3" align="center">
+                <Typography color="primary" variant="h4" align="center">
                   User Details
                 </Typography>
                 {data.map((item, index) => (

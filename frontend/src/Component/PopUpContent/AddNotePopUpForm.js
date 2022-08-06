@@ -1,17 +1,25 @@
-import { Stack, TextField } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import React from "react";
 export default function AddNotePopUpForm() {
   return (
-    <Stack direction="column">
-      <TextField id="outlined-multiline-flexible" label="Multiline" multiline />
+    <Stack direction="column" spacing={3}>
       <TextField
-        id="standard-multiline-static"
-        label="Multiline"
+        id="outlined-multiline-flexible"
+        label="Note Title"
         multiline
-        rows={4}
-        defaultValue="Default Value"
-        variant="standard"
       />
+      <TextField
+        id="Inputdescription"
+        label="Note Description"
+        multiline
+        rows={10}
+        variant="outlined"
+      />
+
+      <LoadingButton size="medium" variant="outlined">
+        disabled
+      </LoadingButton>
     </Stack>
   );
 }

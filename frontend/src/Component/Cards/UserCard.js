@@ -33,7 +33,7 @@ export default function UserCard({ data }) {
           </Box>
         </Stack>
       </Paper>
-      <CustomePopUp open={open} setOpen={setOpen}>
+      <CustomePopUp open={open} setOpen={setOpen} title={"User Details"}>
         <UserPopUpDetails data={data} />
       </CustomePopUp>
     </motion.div>
