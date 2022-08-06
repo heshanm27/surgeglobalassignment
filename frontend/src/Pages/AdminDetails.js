@@ -1,4 +1,5 @@
 import {
+  Box,
   Container,
   FormControl,
   Grid,
@@ -15,8 +16,19 @@ import {
 
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import UserCard from "../Component/Cards/UserCard";
 
 export default function AdminDetails() {
+  const data = {
+    id: "U20001",
+    firstName: "sai",
+    lastName: "jan",
+    email: "example@example.com",
+    dateOfBirth: "2000.12.12",
+    mobile: "+94717083178",
+    status: false,
+    accountType: "user",
+  };
   return (
     <>
       <Container maxWidth="lg" sx={{ backgroundColor: "White" }}>
@@ -47,9 +59,10 @@ export default function AdminDetails() {
 
             <Grid item xs={12} sm={12}>
               <Paper sx={{ padding: { xs: 2, sm: 5 }, mt: 5 }}>
-                {new Array(10).fill().map((item) => (
-                  <Typography align="center">Hello</Typography>
+                {new Array(10).fill().map((item, index) => (
+                  <UserCard data={data} key={index} />
                 ))}
+
                 <Stack
                   direction="row"
                   alignItems="center"
