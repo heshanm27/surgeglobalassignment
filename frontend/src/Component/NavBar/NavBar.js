@@ -77,7 +77,10 @@ export default function NavBar({ children }) {
           </Container>
         </AppBar>
       )}
-      {children}
+      <Box sx={{ mt: 2 }}>
+        {/*children is the content of the page*/}
+        {children}
+      </Box>
     </>
   );
 }
