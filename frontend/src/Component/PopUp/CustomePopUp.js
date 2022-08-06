@@ -15,10 +15,8 @@ export default function CustomePopUp({ open, setOpen, children, title }) {
   const theme = useTheme();
 
   const displaywraper = {
-    padding: 10,
     position: "absolute",
     top: 10,
-    width: "100%",
   };
 
   const iconbtn = {
@@ -37,10 +35,14 @@ export default function CustomePopUp({ open, setOpen, children, title }) {
       sx={displaywraper}
     >
       <DialogTitle>
-        <Box sx={{ display: "flex", width: "300px" }}>
-          <Typography varient="h6" component="div" style={{ flexGrow: "1" }}>
-            {title}
-          </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+          }}
+        >
+          <Typography varient="h3">{title}</Typography>
           <IconButton
             color="primary"
             sx={iconbtn}
