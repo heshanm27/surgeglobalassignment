@@ -10,6 +10,7 @@ import {
   Paper,
   Stack,
   Tooltip,
+  Typography,
 } from "@mui/material";
 
 import React from "react";
@@ -63,10 +64,10 @@ export default function AdminDetails() {
     <>
       <Container maxWidth="lg" sx={{ backgroundColor: "White" }}>
         <Stack direction="row" sx={{ padding: { xs: 2, sm: 5 } }}>
-          <Grid container>
+          <Grid container justifyContent="center" alignItems="center">
             <Grid item xs={12} sm={12}>
-              <Paper sx={{ padding: { xs: 2, sm: 5 } }}>
-                <FormControl fullWidth variant="standard">
+              <Paper sx={{ padding: { xs: 2, sm: 2 } }}>
+                <FormControl sx={{ width: "400px" }} variant="standard">
                   <InputLabel htmlFor="standard-adornment-password">
                     Search User
                   </InputLabel>
@@ -89,6 +90,9 @@ export default function AdminDetails() {
 
             <Grid item xs={12} sm={12}>
               <Paper sx={{ padding: { xs: 2, sm: 5 }, mt: 5 }}>
+                <Typography variant="h3" align="center">
+                  User Details
+                </Typography>
                 {data.map((item, index) => (
                   <UserCard data={item} key={index} />
                 ))}

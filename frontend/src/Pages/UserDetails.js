@@ -1,4 +1,5 @@
 import {
+  Button,
   Container,
   FormControl,
   Grid,
@@ -45,24 +46,37 @@ export default function UserDetails() {
           <Grid container>
             <Grid item xs={12} sm={12}>
               <Paper sx={{ padding: { xs: 2, sm: 5 } }}>
-                <FormControl fullWidth variant="standard">
-                  <InputLabel htmlFor="standard-adornment-password">
-                    Search User
-                  </InputLabel>
-                  <Input
-                    id="standard-adornment-password"
-                    placeholder="Search by name, email, id"
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <Tooltip title="Search">
-                          <IconButton aria-label="toggle password visibility">
-                            <SearchIcon />
-                          </IconButton>
-                        </Tooltip>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
+                <Grid container>
+                  <Grid item xs={12} sm={8}>
+                    <FormControl fullWidth variant="standard">
+                      <InputLabel htmlFor="standard-adornment-search">
+                        Search User
+                      </InputLabel>
+                      <Input
+                        id="standard-adornment-search"
+                        placeholder="Search by Title"
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <Tooltip title="Search">
+                              <IconButton aria-label="search function">
+                                <SearchIcon />
+                              </IconButton>
+                            </Tooltip>
+                          </InputAdornment>
+                        }
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <Stack
+                      direction="row"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Button variant="contained"> Add Note</Button>
+                    </Stack>
+                  </Grid>
+                </Grid>
               </Paper>
             </Grid>
 

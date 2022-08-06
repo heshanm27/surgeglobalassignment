@@ -3,6 +3,7 @@ import {
   IconButton,
   Paper,
   Stack,
+  Tooltip,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -32,12 +33,16 @@ export default function NoteCard({ data }) {
           </Typography>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-          <IconButton aria-label="next" color="info">
-            <EditIcon />
-          </IconButton>
-          <IconButton aria-label="play/pause" color="error">
-            <DeleteIcon />
-          </IconButton>
+          <Tooltip title="Edit ">
+            <IconButton aria-label="next" color="info">
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Delete">
+            <IconButton aria-label="play/pause" color="error">
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
         </Box>
       </Stack>
     </Paper>

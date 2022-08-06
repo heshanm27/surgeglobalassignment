@@ -1,7 +1,8 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import CustomePopUp from "../PopUp/PopUp";
+import CustomePopUp from "../PopUp/CustomePopUp";
+import UserPopUpDetails from "../PopUpContent/UserPopUpDetails";
 export default function UserCard({ data }) {
   useEffect(() => {
     console.log("User card");
@@ -32,7 +33,9 @@ export default function UserCard({ data }) {
           </Box>
         </Stack>
       </Paper>
-      <CustomePopUp open={open} data={newdata} setOpen={setOpen} />
+      <CustomePopUp open={open} setOpen={setOpen}>
+        <UserPopUpDetails data={data} />
+      </CustomePopUp>
     </motion.div>
   );
 }
