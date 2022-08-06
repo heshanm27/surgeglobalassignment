@@ -1,14 +1,22 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import CustomePopUp from "../PopUp/PopUp";
 export default function UserCard({ data }) {
   useEffect(() => {
+    console.log("User card");
     console.log(data);
   }, []);
+  const [open, setOpen] = useState(false);
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const newdata = data;
   return (
     <motion.div whileHover={{ scale: 1.1, cursor: "pointer" }}>
-      <Paper sx={{ mt: 5 }}>
+      <Paper sx={{ mt: 5 }} onClick={handleOpen}>
         <Stack direction="row" justifyContent="space-between">
           <Box sx={{ p: 2 }}>
             <Typography component="div" variant="h5">
@@ -24,6 +32,7 @@ export default function UserCard({ data }) {
           </Box>
         </Stack>
       </Paper>
+      <CustomePopUp open={open} data={newdata} setOpen={setOpen} />
     </motion.div>
   );
 }
