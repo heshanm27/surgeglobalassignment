@@ -1,4 +1,11 @@
-import { Box, IconButton, Paper, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -6,55 +13,30 @@ export default function NoteCard({ data }) {
   useEffect(() => {
     console.log(data);
   }, []);
+
   return (
     <Paper sx={{ mt: 5 }}>
       <Stack direction="row" justifyContent="space-between">
         <Box sx={{ p: 2 }}>
           <Typography component="div" variant="h5">
-            {data.firstName} {data.lastName}
+            {data.title}
           </Typography>
           <Typography
             variant="subtitle1"
             color="text.secondary"
             component="div"
+            align="justify"
+            sx={{ mt: 2 }}
           >
-            Email:{data.email}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-          >
-            Date Of Birth:{data.dateOfBirth}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-          >
-            Mobile:{data.mobile}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-          >
-            Status:{data.status ? "New" : "Old"}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-          >
-            Account Type:{data.accountType}
+            {data.discription}
           </Typography>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-          <IconButton aria-label="play/pause">
-            <DeleteIcon />
-          </IconButton>
-          <IconButton aria-label="next">
+          <IconButton aria-label="next" color="info">
             <EditIcon />
+          </IconButton>
+          <IconButton aria-label="play/pause" color="error">
+            <DeleteIcon />
           </IconButton>
         </Box>
       </Stack>

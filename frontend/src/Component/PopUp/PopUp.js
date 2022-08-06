@@ -53,7 +53,7 @@ export default function CustomePopUp({ open, setOpen, data }) {
         </div>
       </DialogTitle>
       <DialogContent dividers>
-        <Container maxWidth="lg" sx={{ p: 2 }} s>
+        <Container sx={{ p: 1 }} s>
           <Typography component="div" variant="h5">
             {data.firstName} {data.lastName}
           </Typography>
