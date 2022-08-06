@@ -8,6 +8,7 @@ import {
   Menu,
   MenuItem,
   Stack,
+  styled,
   Toolbar,
   Typography,
   useTheme,
@@ -24,10 +25,13 @@ export default function NavBar({ children }) {
   //State for menu open and path changes
   const [path, setPath] = useState(true);
   const [open, setOpen] = useState(false);
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
   //hadnle popup menu
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
   const handleClose = () => {
-    setOpen(!open);
+    setAnchorEl(null);
   };
 
   //hide Navbar in Signin and SignUp pages
@@ -37,46 +41,54 @@ export default function NavBar({ children }) {
     }
   }, [location.pathname]);
 
+  const StyledToolbar = styled(Toolbar)({
+    display: "flex",
+    justifyContent: "space-around",
+  });
   return (
     <>
-      {path && (
-        <AppBar position="static">
-          <Container maxWidth="xl">
-            <Toolbar>
-              <Typography
-                variant="h6"
-                noWrap
-                sx={{
-                  flexGrow: 1,
-                  justifyContent: "space-around",
-                }}
-              >
+      <Box>
+        {path && (
+          <AppBar position="static">
+            <Toolbar sx={{ justifyContent: "space-around" }}>
+              <Typography variant="h6" noWrap>
                 LOGO
               </Typography>
-              <Stack direction="row">
-                <IconButton sx={{ p: 0 }} onClick={handleClose}>
-                  <Avatar sx={{ bgcolor: theme.palette.primary.light }}>
-                    H
-                  </Avatar>
-                </IconButton>
-              </Stack>
-              <Menu
-                id="fade-menu"
-                sx={{ mt: -3 }}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-                open={open}
-                onClose={handleClose}
-                TransitionComponent={Fade}
+
+              <IconButton
+                sx={{ p: 0 }}
+                onClick={handleClick}
+                aria-controls={open ? "demo-positioned-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
               >
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Menu>
+                <Avatar sx={{ bgcolor: theme.palette.primary.light }}>H</Avatar>
+              </IconButton>
             </Toolbar>
-          </Container>
-        </AppBar>
-      )}
+            {/** Pop Up Menu*/}
+            <Menu
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              TransitionComponent={Fade}
+            >
+              <MenuItem onClick={handleClose} sx={{ width: "150px" }}>
+                <Typography sx={{ textAlign: "center" }}> Log Out</Typography>
+              </MenuItem>
+            </Menu>
+          </AppBar>
+        )}
+      </Box>
       <Box sx={{ mt: 2 }}>
         {/*children is the content of the page*/}
         {children}
