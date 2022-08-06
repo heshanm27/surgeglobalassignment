@@ -36,7 +36,11 @@ export default function NavBar({ children }) {
 
   //hide Navbar in Signin and SignUp pages
   useEffect(() => {
-    if (location.pathname === "/" || location.pathname === "/signin") {
+    if (
+      location.pathname === "/" ||
+      location.pathname === "/signin" ||
+      location.pathname === "/newuser"
+    ) {
       setPath(false);
     }
   }, [location.pathname]);
