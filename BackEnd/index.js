@@ -4,13 +4,21 @@ const app = express();
 require("dotenv").config();
 app.use(express.json());
 
+//module imports
 const notFound = require("./middleware/not_found");
 const errorHandlerMiddleware = require("./middleware/error_handle");
+
+//Router moduel imports
+const authRoute = require("./routes/AuthRoute");
+const noteRoute = require("./Routes/NoteRoute");
+const userRoute = require("./routes/UserRoute");
 
 //Export MongoDB connect Module
 const connectDB = require("./DataBase/DataBaseConnetion");
 
-// app.use("/api/v1/user");
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/user", noteRoute);
+app.use("/api/v1/task", taskRoute);
 
 // Not found Route Middleware
 app.use(notFound);
@@ -21,7 +29,7 @@ app.use(errorHandlerMiddleware);
 const port = process.env.PORT || 5000;
 
 /**
- * @description start express server and start Mongod atlas connection
+ * @description start express server and start Mongodb atlas connection
  */
 const start = async () => {
   try {
