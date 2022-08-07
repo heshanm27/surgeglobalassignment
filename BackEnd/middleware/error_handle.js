@@ -1,5 +1,6 @@
 //get CustomAPIError class module
-const { CustomAPIError } = require("../Errors/customError");
+const { StatusCodes } = require("http-status-codes");
+const CustomAPIError = require("../Errors/customError");
 
 /**
  * @description Errorhandleing Middleware function when error Occure if  error instance from CustomAPIError class
@@ -11,7 +12,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     return res.status(err.statusCode).json({ msg: err.message });
   }
   return res
-    .status(500)
+    .status(StatusCodes.INTERNAL_SERVER_ERROR)
     .json({ msg: "Something went wrong, please try again" });
 };
 
