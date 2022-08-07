@@ -1,4 +1,4 @@
-const { createCustomError } = require("../Errors/customError");
+const { CustomAPIError } = require("../Errors/errorClases");
 const noteModel = require("../Models/NoteModel");
 
 const getNotesDetails = async (req, res) => {
@@ -14,7 +14,7 @@ const getNotesDetails = async (req, res) => {
 const getNoteDetailsById = async (req, res) => {
   const note = await noteModel.findById(req.params.id);
   if (!note) {
-    return CustomAPIError("note not found", 404);
+    throw new CustomAPIError("note not found", 404);
   }
   res.status(200).json(note);
 };
@@ -40,7 +40,7 @@ const deleteNoteDetails = async (req, res) => {
     res.status(200).json(note);
   } catch (err) {
     console.log(err.reason.BSONTypeError);
-    return CustomAPIError("User not found", 404);
+    throw new CustomAPIError("User not found", 404);
   }
 };
 
