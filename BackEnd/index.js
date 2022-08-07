@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 
 require("dotenv").config();
+require("express-async-errors");
+
 app.use(express.json());
 
 //module imports
@@ -16,9 +18,13 @@ const userRoute = require("./routes/UserRoute");
 //Export MongoDB connect Module
 const connectDB = require("./DataBase/DataBaseConnetion");
 
+//default route show message
+app.get("/", (req, res) => res.send("Surge Global Assignment"));
+
+//route paths
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
-app.use("/api/v1/task", noteRoute);
+app.use("/api/v1/note", noteRoute);
 
 // Not found Route Middleware
 app.use(notFound);

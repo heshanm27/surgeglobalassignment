@@ -1,4 +1,4 @@
-const CustomAPIError = require("../Errors/CustomerError");
+const { createCustomError } = require("../Errors/customError");
 const userModel = require("../Models/UserModel");
 
 const signUp = async (req, res) => {};

@@ -1,5 +1,5 @@
 //get CustomAPIError class module
-const { CustomAPIError } = require("../Errors/CustomerError");
+const { CustomAPIError } = require("../Errors/customError");
 
 /**
  * @description Errorhandleing Middleware function when error Occure if  error instance from CustomAPIError class

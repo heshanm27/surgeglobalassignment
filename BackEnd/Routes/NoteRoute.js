@@ -9,12 +9,11 @@ const {
   deleteNoteDetails,
 } = require("../Controllers/NoteController");
 
-router.route("/").get(getNotesDetails);
+router.route("/").post(postNoteDetails).get(getNotesDetails);
 router
   .route("/:id")
   .get(getNoteDetailsById)
-  .post(postNoteDetails)
-  .put(updateNoteDetails)
+  .patch(updateNoteDetails)
   .delete(deleteNoteDetails);
 
 module.exports = router;

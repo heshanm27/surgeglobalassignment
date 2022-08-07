@@ -1,4 +1,4 @@
-const CustomAPIError = require("../Errors/CustomerError");
+const { createCustomError } = require("../Errors/customError");
 const userModel = require("../Models/UserModel");
 
 const getUsersDetails = async (req, res) => {
@@ -6,9 +6,8 @@ const getUsersDetails = async (req, res) => {
   res.status(200).json(users);
 
   if (!users) {
-    throw new CustomAPIError("Users not found", 404);
+    return createCustomError("Users not found", 404);
   }
-  throw new CustomAPIError(error.message, 500);
 };
 
 const getUserDetailsById = async (req, res) => {
@@ -16,16 +15,13 @@ const getUserDetailsById = async (req, res) => {
   res.status(200).json(user);
 
   if (!user) {
-    throw new CustomAPIError("User not found", 404);
+    return createCustomError("User not found", 404);
   }
-  throw new CustomAPIError(error.message, 500);
 };
 
 const postUserDetails = async (req, res) => {
   const user = await userModel.create(req.body);
   res.status(201).json(user);
-
-  throw new CustomAPIError(error.message, 500);
 };
 
 const updateUserDetails = async (req, res) => {
@@ -40,9 +36,8 @@ const deleteUserDetails = async (req, res) => {
   res.status(200).json(user);
 
   if (!user) {
-    throw new CustomAPIError("User not found", 404);
+    return createCustomError("User not found", 404);
   }
-  throw new CustomAPIError(error.message, 500);
 };
 
 module.exports = {

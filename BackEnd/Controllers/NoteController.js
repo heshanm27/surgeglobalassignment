@@ -1,11 +1,13 @@
-const CustomAPIError = require("../Errors/CustomerError");
+const { createCustomError } = require("../Errors/customError");
 const noteModel = require("../Models/NoteModel");
 
 const getNotesDetails = async (req, res) => {
-  const notes = await noteModel.find({});
-  if (!notes) {
-    return CustomAPIError("notes not found", 404);
-  }
+  let notes = await noteModel.find({}).sort({ createdAt: -1 });
+
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+  notes = notes.skip(skip).limit(limit);
   res.status(200).json(notes);
 };
 
@@ -19,8 +21,7 @@ const getNoteDetailsById = async (req, res) => {
 
 const postNoteDetails = async (req, res) => {
   const note = await noteModel.create(req.body);
-
-  res.status(200).json(note);
+  res.status(200).json({ note });
 };
 
 const updateNoteDetails = async (req, res) => {
@@ -32,10 +33,15 @@ const updateNoteDetails = async (req, res) => {
 };
 
 const deleteNoteDetails = async (req, res) => {
-  const note = await noteModel.findByIdAndDelete(req.params.id, {
-    new: true,
-  });
-  res.status(200).json(note);
+  try {
+    const note = await noteModel.findByIdAndDelete(req.params.id, {
+      new: true,
+    });
+    res.status(200).json(note);
+  } catch (err) {
+    console.log(err.reason.BSONTypeError);
+    return CustomAPIError("User not found", 404);
+  }
 };
 
 module.exports = {
