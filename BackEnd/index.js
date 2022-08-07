@@ -17,8 +17,8 @@ const userRoute = require("./routes/UserRoute");
 const connectDB = require("./DataBase/DataBaseConnetion");
 
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/user", noteRoute);
-app.use("/api/v1/task", taskRoute);
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/task", noteRoute);
 
 // Not found Route Middleware
 app.use(notFound);

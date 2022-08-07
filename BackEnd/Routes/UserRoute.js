@@ -9,6 +9,12 @@ const {
   deleteUserDetails,
 } = require("../Controllers/UserController");
 
-router.route("/");
+router.route("/").get(getUsersDetails);
+router
+  .route("/:id")
+  .get(getUserDetailsById)
+  .post(postUserDetails)
+  .put(updateUserDetails)
+  .delete(deleteUserDetails);
 
 module.exports = router;
