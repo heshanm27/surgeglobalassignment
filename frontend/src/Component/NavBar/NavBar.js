@@ -13,15 +13,14 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function NavBar({ children }) {
   const theme = useTheme();
 
   //react-router-dom Location hook for get pathname
   const location = useLocation();
-  const { token } = useParams();
-  console.log(token);
+
   //State for menu open and path changes
   const [path, setPath] = useState(true);
   const [open, setOpen] = useState(false);

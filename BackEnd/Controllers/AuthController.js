@@ -25,8 +25,14 @@ const signUp = async (req, res) => {
   const id = (await UserModel.gearateId()) + 1;
 
   //create user In MongoDB
-  const user = await userModel.create({ id, email, password: tempPassword });
-
+  try {
+    const user = await userModel.create({ id, email, password: tempPassword });
+  } catch (error) {
+    if (error.code === 11000) {
+      throw new BadRequestError("User already exists");
+    }
+    throw error;
+  }
   //send email with tempPassword
   const isSendEmail = await sendEmail(email, tempPassword);
 

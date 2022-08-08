@@ -11,10 +11,9 @@ import Container from "@mui/material/Container";
 import { Paper, Stack } from "@mui/material";
 import { publicRequest } from "../../DefaultAxios/defultaxios";
 import LoadingButton from "@mui/lab/LoadingButton";
-
+import CustomSnackBar from "../../Component/CustomSnackBar/CustomSnackBar";
 const initialValues = {
   email: "",
-  otherErrors: "",
 };
 
 export default function SignUp() {
@@ -22,11 +21,20 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState(initialValues);
 
-  async function signIn(email) {
+  //customer snackbar props
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
+  //send signUp request to server
+  async function signUp(email) {
     const res = await publicRequest.post(`auth/signUp`, { email });
     return res;
   }
 
+  //validate email
   const validate = () => {
     let temp = {};
     temp.email =
@@ -52,19 +60,26 @@ export default function SignUp() {
     });
   };
 
+  //handle submit
   const handleSubmit = async (event) => {
-    setErrors(initialValues);
+    console.log(values.email);
     event.preventDefault();
     setLoading(true);
     if (validate()) {
       try {
-        const res = await signIn(values.email);
+        const res = await signUp(values.email);
         setValues(initialValues);
         setLoading(false);
       } catch (err) {
         setErrors({
           ...errors,
           otherErrors: err.response.data.msg,
+        });
+
+        setNotify({
+          isOpen: true,
+          message: `Error Occurd ${err.response.data.msg}`,
+          type: "error",
         });
         setLoading(false);
       }
@@ -119,13 +134,6 @@ export default function SignUp() {
               Sign Up
             </LoadingButton>
           </Box>
-          {errors.otherErrors ? (
-            <Typography variant="body2" color="error">
-              {errors.otherErrors}
-            </Typography>
-          ) : (
-            <span></span>
-          )}
         </Stack>
 
         <Grid
@@ -138,6 +146,7 @@ export default function SignUp() {
               Already have an account? Sign in
             </Link>
           </Grid>
+          <CustomSnackBar notify={notify} setNotify={setNotify} />
         </Grid>
       </Paper>
     </Container>
