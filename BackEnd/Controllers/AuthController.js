@@ -34,7 +34,7 @@ const signUp = async (req, res) => {
     res.status(StatusCodes.OK).json({ isSendEmail });
   } else {
     throw new CustomAPIError(
-      "Email not sent",
+      "Something went wrong while sending email",
       StatusCodes.INTERNAL_SERVER_ERROR
     );
   }

@@ -4,8 +4,6 @@ const app = express();
 require("dotenv").config();
 require("express-async-errors");
 
-app.use(express.json());
-
 //module imports
 const notFound = require("./middleware/not_found");
 const errorHandlerMiddleware = require("./middleware/error_handle");
@@ -13,10 +11,21 @@ const {
   authenticationAdmin,
   authenticationUser,
 } = require("./middleware/authentication");
+const cors = require("cors");
 //Router moduel imports
 const authRoute = require("./routes/AuthRoute");
 const noteRoute = require("./Routes/NoteRoute");
 const userRoute = require("./routes/UserRoute");
+
+//cors policy configuration
+const corsOptions = {
+  origin: "http://localhost:3000",
+  method: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+
+app.use(express.json());
+app.use(cors(corsOptions));
 
 //Export MongoDB connect Module
 const connectDB = require("./DataBase/DataBaseConnetion");
