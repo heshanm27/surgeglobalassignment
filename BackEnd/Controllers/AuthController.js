@@ -6,6 +6,7 @@ const userModel = require("../Models/UserModel");
 const { StatusCodes } = require("http-status-codes");
 const { v4: uuidv4 } = require("uuid");
 const jwt = require("jsonwebtoken");
+const UserModel = require("../Models/UserModel");
 
 const signUp = async (req, res) => {
   const { email } = req.body;
@@ -18,8 +19,11 @@ const signUp = async (req, res) => {
   //genrate Tempory Password
   const tempPassword = uuidv4();
 
+  //call mongoose static method for get a new userID
+  const id = (await UserModel.gearateId()) + 1;
+
   //create user In MongoDB
-  const user = await userModel.create({ id: 3, email, password: tempPassword });
+  const user = await userModel.create({ id, email, password: tempPassword });
 
   //create Jwt Token
   const jwtToken = jwt.sign(
@@ -29,6 +33,8 @@ const signUp = async (req, res) => {
   );
 
   res.status(StatusCodes.OK).json({ tempPassword, jwtToken });
+
+  res.status(StatusCodes.OK).json("ok");
 };
 
 const signIn = async (req, res) => {

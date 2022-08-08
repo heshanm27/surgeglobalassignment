@@ -41,4 +41,7 @@ UserSchema.methods.validatePassword = async function (enteredPassword) {
   return isValid;
 };
 
+UserSchema.statics.gearateId = async function () {
+  return this.count();
+};
 module.exports = mongoose.model("User", UserSchema);
