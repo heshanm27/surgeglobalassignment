@@ -8,8 +8,14 @@ const {
   updateNoteDetails,
   deleteNoteDetails,
 } = require("../Controllers/NoteController");
-const { authenticationUser } = require("../middleware/authenticationUser");
-router.route("/").post(postNoteDetails).get(getNotesDetails);
+const {
+  authenticationAdmin,
+  authenticationUser,
+} = require("../middleware/authentication");
+router
+  .route("/")
+  .get(authenticationAdmin, getNotesDetails)
+  .post(postNoteDetails);
 router
   .route("/:id")
   .get(getNoteDetailsById)

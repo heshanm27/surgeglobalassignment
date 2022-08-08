@@ -5,8 +5,8 @@ const {
   getUsersDetails,
   getUserDetailsById,
 } = require("../Controllers/UserController");
-const { authenticationAdmin } = require("../middleware/authenticationAdmin");
-router.route("/").get(authenticationAdmin, getUsersDetails);
-router.route("/:id").get(authenticationAdmin, getUserDetailsById);
+
+router.route("/").get(getUsersDetails);
+router.route("/:id").get(getUserDetailsById);
 
 module.exports = router;

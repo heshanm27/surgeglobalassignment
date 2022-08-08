@@ -23,7 +23,9 @@ app.get("/", (req, res) => res.send("Surge Global Assignment"));
 
 //route paths
 app.use("/api/v1/auth", authRoute);
+
 app.use("/api/v1/user", userRoute);
+
 app.use("/api/v1/note", noteRoute);
 
 // Not found Route Middleware

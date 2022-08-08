@@ -2,12 +2,16 @@ const { CustomAPIError } = require("../Errors/errorClases");
 const noteModel = require("../Models/NoteModel");
 
 const getNotesDetails = async (req, res) => {
-  let notes = await noteModel.find({}).sort({ createdAt: -1 });
-
   const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.limit) || 10;
+  const limit = Number(req.query.limit) || 4;
   const skip = (page - 1) * limit;
-  notes = notes.skip(skip).limit(limit);
+
+  let notes = await noteModel
+    .find({})
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
+
   res.status(200).json(notes);
 };
 
