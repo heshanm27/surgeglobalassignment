@@ -17,7 +17,7 @@ export default function CustomSnackBar(props) {
       autoHideDuration={5000}
       onClose={handleClose}
     >
-      <Alert severity={notify ? notify.type : "error"} onClose={handleClose}>
+      <Alert severity={notify ? notify.type : "info"} onClose={handleClose}>
         {notify.message}
       </Alert>
     </Snackbar>

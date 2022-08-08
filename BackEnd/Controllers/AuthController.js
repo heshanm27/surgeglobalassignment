@@ -48,7 +48,7 @@ const signUp = async (req, res) => {
 
 const signIn = async (req, res) => {
   const { email, password } = req.body;
-
+  console.log(req.body);
   let user = await userModel.findOne({ email });
 
   if (!user) {

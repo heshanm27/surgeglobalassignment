@@ -25,7 +25,7 @@ export default function SignUp() {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
-    type: "",
+    type: "error",
   });
 
   //send signUp request to server
@@ -62,7 +62,6 @@ export default function SignUp() {
 
   //handle submit
   const handleSubmit = async (event) => {
-    console.log(values.email);
     event.preventDefault();
     setLoading(true);
     if (validate()) {

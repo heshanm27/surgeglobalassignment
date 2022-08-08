@@ -7,6 +7,7 @@ import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import UserDetails from "../Pages/UserDetails/UserDetails";
 import UserDetailsForm from "../Pages/UserDetailsForm/UserDetailsForm";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   return (
@@ -15,9 +16,11 @@ function App() {
         <Routes>
           <Route path="/" element={<SignUp />} />
           <Route path="/signIn" element={<SignIn />} />
-          <Route path="/newuser" element={<UserDetailsForm />} />
-          <Route path="/admin" element={<AdminDetails />} />
-          <Route path="/user" element={<UserDetails />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/newuser" element={<UserDetailsForm />} />
+            <Route path="/admin" element={<AdminDetails />} />
+            <Route path="/user" element={<UserDetails />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </NavBar>
