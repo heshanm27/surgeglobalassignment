@@ -7,21 +7,21 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Stack,
   styled,
   Toolbar,
   Typography,
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export default function NavBar({ children }) {
   const theme = useTheme();
 
   //react-router-dom Location hook for get pathname
   const location = useLocation();
-
+  const { token } = useParams();
+  console.log(token);
   //State for menu open and path changes
   const [path, setPath] = useState(true);
   const [open, setOpen] = useState(false);
@@ -38,11 +38,12 @@ export default function NavBar({ children }) {
   useEffect(() => {
     if (
       location.pathname === "/" ||
-      location.pathname === "/signin" ||
+      location.pathname === "/signIn" ||
       location.pathname === "/newuser"
     ) {
       setPath(false);
     }
+    console.log(location.pathname + token);
   }, [location.pathname]);
 
   const StyledToolbar = styled(Toolbar)({

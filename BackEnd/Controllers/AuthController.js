@@ -1,7 +1,9 @@
 const {
   BadRequestError,
   UnAuthenticatedError,
+  CustomAPIError,
 } = require("../Errors/errorClases");
+const sendEmail = require("../Email/Email");
 const userModel = require("../Models/UserModel");
 const { StatusCodes } = require("http-status-codes");
 const { v4: uuidv4 } = require("uuid");
@@ -25,16 +27,17 @@ const signUp = async (req, res) => {
   //create user In MongoDB
   const user = await userModel.create({ id, email, password: tempPassword });
 
-  //create Jwt Token
-  const jwtToken = jwt.sign(
-    { id: user.id, email: user.email },
-    process.env.JWT_SECRET,
-    { expiresIn: "15m" }
-  );
+  //send email with tempPassword
+  const isSendEmail = await sendEmail(email, tempPassword);
 
-  res.status(StatusCodes.OK).json({ tempPassword, jwtToken });
-
-  res.status(StatusCodes.OK).json("ok");
+  if (isSendEmail) {
+    res.status(StatusCodes.OK).json({ isSendEmail });
+  } else {
+    throw new CustomAPIError(
+      "Email not sent",
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
 };
 
 const signIn = async (req, res) => {
