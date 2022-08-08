@@ -1,17 +1,14 @@
-import { useTheme } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import NavBar from "./Component/NavBar/NavBar";
+import NavBar from "../Component/NavBar/NavBar";
 
-import AdminDetails from "./Pages/AdminDetails";
-import NotFound from "./Pages/NotFound";
-import SignIn from "./Pages/SignIn";
-import SignUp from "./Pages/SignUp";
-import UserDetails from "./Pages/UserDetails";
-import UserDetailsForm from "./Pages/UserDetailsForm/UserDetailsForm";
+import AdminDetails from "../Pages/AdminDetails/AdminDetails";
+import NotFound from "../Pages/NotFound/NotFound";
+import SignIn from "../Pages/SignIn/SignIn";
+import SignUp from "../Pages/SignUp/SignUp";
+import UserDetails from "../Pages/UserDetails/UserDetails";
+import UserDetailsForm from "../Pages/UserDetailsForm/UserDetailsForm";
 
 function App() {
-  const theme = useTheme();
   return (
     <>
       <NavBar>

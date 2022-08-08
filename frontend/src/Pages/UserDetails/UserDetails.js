@@ -16,9 +16,9 @@ import {
 import React from "react";
 
 import SearchIcon from "@mui/icons-material/Search";
-import NoteCard from "../Component/Cards/NoteCard";
-import AddNotePopUpForm from "../Component/PopUpContent/AddNotePopUpForm";
-import CustomePopUp from "../Component/PopUp/CustomePopUp";
+import NoteCard from "../../Component/Cards/NoteCard";
+import AddNotePopUpForm from "../../Component/PopUpContent/AddNotePopUpForm";
+import CustomePopUp from "../../Component/PopUp/CustomePopUp";
 import { useState } from "react";
 export default function UserDetails() {
   const [open, setOpen] = useState(false);

@@ -15,7 +15,7 @@ import {
 
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import UserCard from "../Component/Cards/UserCard";
+import UserCard from "../../Component/Cards/UserCard";
 
 export default function AdminDetails() {
   const data = [

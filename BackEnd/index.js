@@ -9,7 +9,10 @@ app.use(express.json());
 //module imports
 const notFound = require("./middleware/not_found");
 const errorHandlerMiddleware = require("./middleware/error_handle");
-
+const {
+  authenticationAdmin,
+  authenticationUser,
+} = require("./middleware/authentication");
 //Router moduel imports
 const authRoute = require("./routes/AuthRoute");
 const noteRoute = require("./Routes/NoteRoute");
@@ -24,9 +27,9 @@ app.get("/", (req, res) => res.send("Surge Global Assignment"));
 //route paths
 app.use("/api/v1/auth", authRoute);
 
-app.use("/api/v1/user", userRoute);
+app.use("/api/v1/user", authenticationAdmin, userRoute);
 
-app.use("/api/v1/note", noteRoute);
+app.use("/api/v1/note", authenticationUser, noteRoute);
 
 // Not found Route Middleware
 app.use(notFound);

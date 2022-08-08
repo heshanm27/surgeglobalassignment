@@ -43,7 +43,6 @@ export default function NavBar({ children }) {
     ) {
       setPath(false);
     }
-    console.log(location.pathname + token);
   }, [location.pathname]);
 
   const StyledToolbar = styled(Toolbar)({
