@@ -43,18 +43,27 @@ const signUp = async (req, res) => {
 const signIn = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await userModel.findOne({ email });
+  let user = await userModel.findOne({ email });
 
   if (!user) {
     throw new BadRequestError("User not found");
   }
 
   const isPasswordValid = await user.validatePassword(password);
+
   if (!isPasswordValid) {
     throw new UnAuthenticatedError("Invalid Password");
   }
 
-  res.status(StatusCodes.OK).json({ user });
+  const token = user.gearateJWTToken();
+  user = {
+    _id: user._id,
+    id: user.id,
+    email: user.email,
+    status: user.status,
+    accountType: user.accountType,
+  };
+  res.status(StatusCodes.OK).json({ token, user });
 };
 
 module.exports = { signUp, signIn };

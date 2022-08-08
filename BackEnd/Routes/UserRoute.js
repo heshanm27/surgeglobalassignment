@@ -4,16 +4,9 @@ const router = express.Router();
 const {
   getUsersDetails,
   getUserDetailsById,
-  postUserDetails,
-  updateUserDetails,
-  deleteUserDetails,
 } = require("../Controllers/UserController");
-
-router.route("/").get(getUsersDetails).post(postUserDetails);
-router
-  .route("/:id")
-  .get(getUserDetailsById)
-  .put(updateUserDetails)
-  .delete(deleteUserDetails);
+const { authenticationAdmin } = require("../middleware/authenticationAdmin");
+router.route("/").get(authenticationAdmin, getUsersDetails);
+router.route("/:id").get(authenticationAdmin, getUserDetailsById);
 
 module.exports = router;

@@ -19,12 +19,16 @@ const UserSchema = mongoose.Schema(
     },
     dateOfBirth: { type: Date },
     mobile: { type: Number },
-    status: { type: Boolean, default: false },
+    status: { type: Boolean, default: true },
     password: {
       type: String,
       required: [true, "Please insert a password"],
     },
-    accountType: { type: String, default: "user" },
+    accountType: {
+      type: String,
+      default: "user",
+      enum: { values: ["user", "admin"], message: "{VALUE} is not supported}" },
+    },
   },
   { timestamps: true }
 );
@@ -39,6 +43,14 @@ UserSchema.pre("save", async function (next) {
 UserSchema.methods.validatePassword = async function (enteredPassword) {
   const isValid = await bcrypt.compare(enteredPassword, this.password);
   return isValid;
+};
+
+UserSchema.methods.gearateJWTToken = function () {
+  return jwt.sign(
+    { id: this._id, accountType: this.accountType },
+    process.env.JWT_SECRET,
+    { expiresIn: "30d" }
+  );
 };
 
 UserSchema.statics.gearateId = async function () {
