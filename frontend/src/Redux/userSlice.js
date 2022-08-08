@@ -16,6 +16,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState: {
     userInfo: {},
+    loggedIn: false,
     pending: false,
     error: false,
     errorMessage: "",
@@ -23,6 +24,7 @@ export const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.userInfo = {};
+      state.loggedIn = false;
     },
   },
   extraReducers: {
@@ -33,6 +35,7 @@ export const userSlice = createSlice({
     },
     [SignInUser.fulfilled]: (state, action) => {
       state.pending = false;
+      state.loggedIn = true;
       state.userInfo = action.payload;
     },
     [SignInUser.rejected]: (state, action) => {
