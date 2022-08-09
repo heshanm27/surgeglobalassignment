@@ -38,6 +38,7 @@ const postNoteDetails = async (req, res) => {
 };
 
 const updateNoteDetails = async (req, res) => {
+  console.log(req.body);
   const note = await noteModel.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     validator: true,

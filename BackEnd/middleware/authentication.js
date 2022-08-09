@@ -40,7 +40,7 @@ const authenticationAdmin = async (req, res, next) => {
 const authenticationUser = async (req, res, next) => {
   // check header
   const authHeader = req.headers.authorization;
-
+  console.log(req.headers.authorization);
   //cheack if header is empty or start with Bearer
   if (!authHeader || !authHeader.startsWith("Bearer")) {
     throw new UnAuthenticatedError("Authentication invalid");
@@ -48,7 +48,7 @@ const authenticationUser = async (req, res, next) => {
 
   //split the Bearer from the token
   const token = authHeader.split(" ")[1];
-
+  console.log(token);
   try {
     // verify the token
     const payload = jwt.verify(token, process.env.JWT_SECRET);

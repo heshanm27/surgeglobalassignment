@@ -78,7 +78,7 @@ export default function UserDetails() {
   };
   useEffect(() => {
     fetchData();
-  }, [page, search]);
+  }, [page, search, open]);
   return (
     <>
       <NavBar />
@@ -144,7 +144,12 @@ export default function UserDetails() {
                 </Typography>
                 {notes &&
                   notes.map((item, index) => (
-                    <NoteCard data={item} key={index} />
+                    <NoteCard
+                      data={item}
+                      key={index}
+                      setOpen={setOpen}
+                      setNotify={setNotify}
+                    />
                   ))}
                 {notes && notes.length === 0 && (
                   <Typography
@@ -190,7 +195,7 @@ export default function UserDetails() {
         <CustomSnackBar notify={notify} setNotify={setNotify} />
         {/**CusomePopup call with props */}
         <CustomePopUp open={open} setOpen={setOpen} title={"Create new note"}>
-          <AddNotePopUpForm data={{}} />
+          <AddNotePopUpForm data={{}} setOpen={setOpen} setNotify={setNotify} />
         </CustomePopUp>
       </Container>
     </>

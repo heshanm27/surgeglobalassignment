@@ -12,10 +12,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CustomePopUp from "../PopUp/CustomePopUp";
 import AddNotePopUpForm from "../PopUpContent/AddNotePopUpForm";
-export default function NoteCard({ data }) {
-  const [open, setOpen] = useState(false);
+export default function NoteCard({ data, setNotify }) {
+  const [open, setOpenmodel] = useState(false);
   const handleOpen = () => {
-    setOpen(true);
+    setOpenmodel(true);
   };
 
   return (
@@ -59,8 +59,12 @@ export default function NoteCard({ data }) {
           </Tooltip>
         </Grid>
       </Grid>
-      <CustomePopUp open={open} setOpen={setOpen} title={"Update Note"}>
-        <AddNotePopUpForm data={data} />
+      <CustomePopUp open={open} setOpen={setOpenmodel} title={"Update Note"}>
+        <AddNotePopUpForm
+          data={data}
+          setOpen={setOpenmodel}
+          setNotify={setNotify}
+        />
       </CustomePopUp>
     </Paper>
   );
