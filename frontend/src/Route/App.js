@@ -22,7 +22,10 @@ function App() {
           path="/newuser"
           element={loggedIn ? <SignIn /> : <UserDetailsForm />}
         />
-        <Route path="/admin" element={<AdminDetails />} />
+        <Route
+          path="/admin"
+          element={loggedIn ? <SignIn /> : <AdminDetails />}
+        />
         <Route
           path="/user"
           element={!loggedIn ? <SignIn /> : <UserDetails />}

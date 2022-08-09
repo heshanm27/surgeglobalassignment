@@ -2,11 +2,33 @@ const { CustomAPIError } = require("../Errors/errorClases");
 const userModel = require("../Models/UserModel");
 
 const getUsersDetails = async (req, res) => {
-  const users = await userModel.find({});
-  if (!users) {
-    throw new CustomAPIError("Users not found", 404);
-  }
-  res.status(200).json(users);
+  const search = String(req.query.search);
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 5;
+  const skip = (page - 1) * limit;
+  let usersCount = await userModel.find({}).count();
+  let users = await userModel
+    .find({
+      $or: [
+        {
+          firstName: { $regex: search, $options: "i" },
+        },
+        {
+          id: Number(search),
+        },
+        {
+          lastName: { $regex: search, $options: "i" },
+        },
+        {
+          email: { $regex: search, $options: "i" },
+        },
+      ],
+    })
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
+  usersCount = Math.ceil(usersCount / limit);
+  res.status(200).json({ users, usersCount });
 };
 
 const getUserDetailsById = async (req, res) => {

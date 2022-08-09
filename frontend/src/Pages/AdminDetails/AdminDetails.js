@@ -1,4 +1,5 @@
 import {
+  CircularProgress,
   Container,
   FormControl,
   Grid,
@@ -13,54 +14,67 @@ import {
   Typography,
 } from "@mui/material";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import UserCard from "../../Component/Cards/UserCard";
 import NavBar from "../../Component/NavBar/NavBar";
-
+import { publicRequest } from "../../DefaultAxios/defultaxios";
+import { useSelector } from "react-redux";
+import CustomSnackBar from "../../Component/CustomSnackBar/CustomSnackBar";
 export default function AdminDetails() {
-  const data = [
-    {
-      id: "U20001",
-      firstName: "Nimal",
-      lastName: "Perera",
-      email: "example@example.com",
-      dateOfBirth: "2000.12.12",
-      mobile: "+94717083178",
-      status: false,
-      accountType: "user",
-    },
-    {
-      id: "U20001",
-      firstName: "Hehsan",
-      lastName: "Madhuranga",
-      email: "example@example.com",
-      dateOfBirth: "2000.12.12",
-      mobile: "+94717083178",
-      status: false,
-      accountType: "user",
-    },
-    {
-      id: "U20001",
-      firstName: "Oshan",
-      lastName: "Madhushanka",
-      email: "example@example.com",
-      dateOfBirth: "2000.12.12",
-      mobile: "+94717083178",
-      status: false,
-      accountType: "user",
-    },
-    {
-      id: "U20001",
-      firstName: "Johan",
-      lastName: "Perera",
-      email: "example@example.com",
-      dateOfBirth: "2000.12.12",
-      mobile: "+94717083178",
-      status: false,
-      accountType: "user",
-    },
-  ];
+  const [open, setOpen] = useState(false);
+  const [users, setUsers] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [refetch, setRefetch] = useState(false);
+  const [count, setCount] = useState(1);
+  const [page, setPage] = useState(0);
+  const [search, setSearch] = useState("");
+  const { userInfo } = useSelector((state) => state.user);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  //customer snackbar props
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "error",
+    title: "",
+  });
+
+  const fetchData = async () => {
+    setLoading(true);
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    try {
+      const { data } = await publicRequest.get(
+        `user?page=${page}&search=${search}`,
+        axiosConfig
+      );
+      console.log(data.users);
+      setLoading(false);
+      setUsers(data.users);
+      setCount(data.usersCount);
+    } catch (err) {
+      console.log(err);
+      setNotify({
+        isOpen: true,
+        message: err.response.data.msg,
+        type: "error",
+        title: "Error",
+      });
+    }
+  };
+
+  const handleChange = async (event, value) => {
+    setPage(value);
+  };
+  useEffect(() => {
+    fetchData();
+  }, [page, search, open, refetch]);
   return (
     <>
       <NavBar />
@@ -76,6 +90,10 @@ export default function AdminDetails() {
                   <Input
                     id="standard-adornment-password"
                     placeholder="Search by name, email, id"
+                    value={search}
+                    onChange={(e) => {
+                      setSearch(e.target.value);
+                    }}
                     endAdornment={
                       <InputAdornment position="end">
                         <Tooltip title="Search">
@@ -95,9 +113,31 @@ export default function AdminDetails() {
                 <Typography color="primary" variant="h4" align="center">
                   User Details
                 </Typography>
-                {data.map((item, index) => (
-                  <UserCard data={item} key={index} />
-                ))}
+
+                {users &&
+                  users.map((item, index) => (
+                    <UserCard data={item} key={index} />
+                  ))}
+                {users && users.length === 0 && (
+                  <Typography
+                    sx={{ mt: 5 }}
+                    variant="body2"
+                    align="center"
+                    color="info"
+                  >
+                    No data to show{" "}
+                  </Typography>
+                )}
+                {loading && (
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    sx={{ mt: 5 }}
+                  >
+                    <CircularProgress width="100px" color="primary" />
+                  </Stack>
+                )}
 
                 <Stack
                   direction="row"
@@ -107,9 +147,12 @@ export default function AdminDetails() {
                 >
                   <Pagination
                     size="small"
-                    count={10}
+                    color="primary"
+                    count={count}
+                    page={page}
+                    defaultPage={page}
+                    onChange={handleChange}
                     variant="outlined"
-                    shape="rounded"
                   />
                 </Stack>
               </Paper>

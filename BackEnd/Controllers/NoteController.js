@@ -3,8 +3,6 @@ const noteModel = require("../Models/NoteModel");
 
 const getNotesDetails = async (req, res) => {
   const search = String(req.query.search);
-  console.log(req.query.search);
-  console.log(search);
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 5;
   const skip = (page - 1) * limit;

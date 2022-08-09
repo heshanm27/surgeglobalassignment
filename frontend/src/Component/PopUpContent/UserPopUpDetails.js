@@ -11,7 +11,10 @@ export default function UserPopUpDetails({ data }) {
         Email:{data.email}
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" component="div">
-        Date Of Birth:{data.dateOfBirth}
+        Date Of Birth:
+        {`${new Date(data.dateOfBirth).getFullYear()}/${new Date(
+          data.dateOfBirth
+        ).getMonth()}/${new Date(data.dateOfBirth).getDay()}`}
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" component="div">
         Mobile:{data.mobile}
