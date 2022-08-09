@@ -26,6 +26,7 @@ export default function SignUp() {
     isOpen: false,
     message: "",
     type: "error",
+    title: "",
   });
 
   //send signUp request to server
@@ -66,7 +67,7 @@ export default function SignUp() {
     setLoading(true);
     if (validate()) {
       try {
-        const res = await signUp(values.email);
+        await signUp(values.email);
         setValues(initialValues);
         setLoading(false);
       } catch (err) {
@@ -79,6 +80,7 @@ export default function SignUp() {
           isOpen: true,
           message: `Error Occurd ${err.response.data.msg}`,
           type: "error",
+          title: "Error",
         });
         setLoading(false);
       }

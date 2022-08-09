@@ -16,6 +16,7 @@ import {
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import UserCard from "../../Component/Cards/UserCard";
+import NavBar from "../../Component/NavBar/NavBar";
 
 export default function AdminDetails() {
   const data = [
@@ -62,6 +63,7 @@ export default function AdminDetails() {
   ];
   return (
     <>
+      <NavBar />
       <Container maxWidth="lg" sx={{ backgroundColor: "White" }}>
         <Stack direction="row" sx={{ padding: { xs: 2, sm: 5 } }}>
           <Grid container justifyContent="center" alignItems="center">

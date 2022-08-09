@@ -20,6 +20,7 @@ import NoteCard from "../../Component/Cards/NoteCard";
 import AddNotePopUpForm from "../../Component/PopUpContent/AddNotePopUpForm";
 import CustomePopUp from "../../Component/PopUp/CustomePopUp";
 import { useState } from "react";
+import NavBar from "../../Component/NavBar/NavBar";
 export default function UserDetails() {
   const [open, setOpen] = useState(false);
 
@@ -51,6 +52,7 @@ export default function UserDetails() {
   ];
   return (
     <>
+      <NavBar />
       <Container maxWidth="lg" sx={{ backgroundColor: "White" }}>
         <Stack direction="row" sx={{ padding: { xs: 2, sm: 5 } }}>
           <Grid container>

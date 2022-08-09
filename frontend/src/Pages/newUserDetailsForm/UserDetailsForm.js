@@ -7,6 +7,8 @@ import Container from "@mui/material/Container";
 import { Paper, Stack } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import NavBar from "../../Component/NavBar/NavBar";
+import CustomPasswordInput from "../../Component/PasswordInput/CustomPasswordInput";
+
 export default function UserDetailsForm() {
   return (
     <>
@@ -85,6 +87,8 @@ export default function UserDetailsForm() {
                     variant="standard"
                   />
                 </Grid>
+
+                <Grid item xs={12}></Grid>
                 <Grid item xs={12}>
                   <LoadingButton size="medium" variant="contained" fullWidth>
                     disabled

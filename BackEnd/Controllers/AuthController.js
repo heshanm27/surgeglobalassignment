@@ -7,7 +7,6 @@ const sendEmail = require("../Email/Email");
 const userModel = require("../Models/UserModel");
 const { StatusCodes } = require("http-status-codes");
 const { v4: uuidv4 } = require("uuid");
-const jwt = require("jsonwebtoken");
 const UserModel = require("../Models/UserModel");
 
 const signUp = async (req, res) => {
@@ -52,7 +51,7 @@ const signIn = async (req, res) => {
   let user = await userModel.findOne({ email });
 
   if (!user) {
-    throw new BadRequestError("User not found");
+    throw new BadRequestError("Invalid Email");
   }
 
   const isPasswordValid = await user.validatePassword(password);

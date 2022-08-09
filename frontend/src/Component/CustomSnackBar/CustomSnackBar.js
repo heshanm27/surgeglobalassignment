@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert } from "@mui/material";
+import { Alert, AlertTitle } from "@mui/material";
 import { Snackbar } from "@mui/material";
 export default function CustomSnackBar(props) {
   const { notify, setNotify } = props;
@@ -18,6 +18,7 @@ export default function CustomSnackBar(props) {
       onClose={handleClose}
     >
       <Alert severity={notify ? notify.type : "info"} onClose={handleClose}>
+        <AlertTitle>{notify.title}</AlertTitle>
         {notify.message}
       </Alert>
     </Snackbar>

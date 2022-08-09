@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -19,7 +17,6 @@ import {
   OutlinedInput,
   Paper,
 } from "@mui/material";
-import { publicRequest } from "../../DefaultAxios/defultaxios";
 import LoadingButton from "@mui/lab/LoadingButton";
 import CustomSnackBar from "../../Component/CustomSnackBar/CustomSnackBar";
 import Visibility from "@mui/icons-material/Visibility";
@@ -27,6 +24,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useSelector, useDispatch } from "react-redux";
 import { SignInUser } from "../../Redux/userSlice";
 import { useNavigate } from "react-router-dom";
+import CustomPasswordInput from "../../Component/PasswordInput/CustomPasswordInput";
+
 const initialValues = {
   email: "",
   password: "",
@@ -39,7 +38,7 @@ export default function SignIn() {
   const [values, setValues] = useState(initialValues);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { pending, error, errorMessage, userInfo } = useSelector(
+  const { pending, error, errorMessage, userInfo, loggedIn } = useSelector(
     (state) => state.user
   );
   //customer snackbar props
@@ -47,12 +46,8 @@ export default function SignIn() {
     isOpen: false,
     message: "",
     type: "error",
+    title: "",
   });
-  //send signIn request to server
-  async function signIn(email, password) {
-    const res = await publicRequest.post(`auth/signIn`, { email, password });
-    return res;
-  }
 
   //validate email
   const validate = () => {
@@ -93,26 +88,23 @@ export default function SignIn() {
     event.preventDefault();
 
     if (validate()) {
-      try {
-        await dispatch(
-          SignInUser({ email: values.email, password: values.password })
-        );
-        if (userInfo.user.status) {
-          navigate("/newuser");
-        }
-        console.log(userInfo.user);
-      } catch (err) {
-        console.log(err);
-        setNotify({
-          isOpen: true,
-          message: err.msg,
-          type: "error",
-        });
-      }
+      dispatch(SignInUser({ email: values.email, password: values.password }));
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (error) {
+      setNotify({
+        isOpen: true,
+        message: errorMessage,
+        type: "error",
+        title: "Error",
+      });
+    }
+    if (loggedIn) {
+      navigate("/newuser");
+    }
+  }, [error, loggedIn]);
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
@@ -149,41 +141,12 @@ export default function SignIn() {
               error={errors.email ? true : false}
               helperText={errors.email}
             />
-            <FormControl fullWidth variant="outlined">
-              <InputLabel
-                error={errors.password ? true : false}
-                htmlFor="password"
-              >
-                Password
-              </InputLabel>
-              <OutlinedInput
-                autoComplete="current-password"
-                id="password"
-                name="password"
-                label="Password"
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChanges}
-                error={errors.password ? true : false}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-              <FormHelperText error={errors.password ? true : false}>
-                {errors.password}
-              </FormHelperText>
-            </FormControl>
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+
+            <CustomPasswordInput
+              values={values}
+              errors={errors}
+              setValues={setValues}
+              handleChanges={handleChanges}
             />
             <LoadingButton
               type="submit"
@@ -200,6 +163,7 @@ export default function SignIn() {
               <Grid item xs>
                 <Link href="/signIn" variant="body2">
                   Forgot password?
+                  <span>{errorMessage}</span>
                 </Link>
               </Grid>
               <Grid item>

@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 import AdminDetails from "../Pages/AdminDetails/AdminDetails";
 import NotFound from "../Pages/NotFound/NotFound";
 import SignIn from "../Pages/SignIn/SignIn";
@@ -9,11 +9,15 @@ import UserDetailsForm from "../Pages/newUserDetailsForm/UserDetailsForm";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
+  const { userInfo, loggedIn } = useSelector((state) => state.user);
   return (
     <>
       <Routes>
-        <Route path="/" element={<SignUp />} />
-        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/" element={loggedIn ? <ProtectedRoute /> : <SignUp />} />
+        <Route
+          path="/signIn"
+          element={loggedIn ? <ProtectedRoute /> : <SignIn />}
+        />
         <Route element={<ProtectedRoute />}>
           <Route path="/newuser" element={<UserDetailsForm />} />
           <Route path="/admin" element={<AdminDetails />} />

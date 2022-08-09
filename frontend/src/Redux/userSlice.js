@@ -3,12 +3,16 @@ import { publicRequest } from "../DefaultAxios/defultaxios";
 
 export const SignInUser = createAsyncThunk(
   "user/signIn",
-  async (credentials) => {
-    const res = await publicRequest.post(`auth/signIn`, {
-      email: credentials.email,
-      password: credentials.password,
-    });
-    return res.data;
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await publicRequest.post(`auth/signIn`, {
+        email: credentials.email,
+        password: credentials.password,
+      });
+      return data;
+    } catch (err) {
+      return rejectWithValue(err.response.data.msg);
+    }
   }
 );
 
@@ -41,8 +45,8 @@ export const userSlice = createSlice({
     [SignInUser.rejected]: (state, action) => {
       state.pending = false;
       state.error = true;
-      console.log(action.error, "lol");
-      state.errorMessage = "hello";
+      state.loggedIn = false;
+      state.errorMessage = action.payload;
     },
   },
 });
