@@ -3,7 +3,6 @@ import {
   Grid,
   IconButton,
   Paper,
-  Stack,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -12,10 +11,52 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CustomePopUp from "../PopUp/CustomePopUp";
 import AddNotePopUpForm from "../PopUpContent/AddNotePopUpForm";
-export default function NoteCard({ data, setNotify }) {
+import ConfirmPopUp from "../PopUp/ConfirmPopUp";
+import { publicRequest } from "../../DefaultAxios/defultaxios";
+import { useSelector } from "react-redux";
+export default function NoteCard({ data, setNotify, setRefetch, refetch }) {
   const [open, setOpenmodel] = useState(false);
+  const { userInfo } = useSelector((state) => state.user);
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+    onConfirm: () => {},
+  });
   const handleOpen = () => {
     setOpenmodel(true);
+  };
+
+  const deleteNote = async () => {
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    try {
+      const { data: deleteNoted } = await publicRequest.delete(
+        `note/${data._id}`,
+        axiosConfig
+      );
+      setConfirmDialog({
+        ...confirmDialog,
+        isOpen: false,
+      });
+      setNotify({
+        isOpen: true,
+        message: "Note deleted SuccessFuly",
+        type: "success",
+        title: "success",
+      });
+      setRefetch(!refetch);
+    } catch (err) {
+      setNotify({
+        isOpen: true,
+        message: err.response.data.msg,
+        type: "error",
+        title: "Error",
+      });
+    }
   };
 
   return (
@@ -53,7 +94,20 @@ export default function NoteCard({ data, setNotify }) {
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete">
-            <IconButton aria-label="play/pause" color="error">
+            <IconButton
+              aria-label="play/pause"
+              color="error"
+              onClick={() =>
+                setConfirmDialog({
+                  isOpen: true,
+                  title: "Delete Note",
+                  subTitle: "Are you sure you want to delete this note?",
+                  onConfirm: () => {
+                    deleteNote();
+                  },
+                })
+              }
+            >
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -64,8 +118,15 @@ export default function NoteCard({ data, setNotify }) {
           data={data}
           setOpen={setOpenmodel}
           setNotify={setNotify}
+          setRefetch={setRefetch}
+          refetch={refetch}
         />
       </CustomePopUp>
+      <ConfirmPopUp
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+        refetch={refetch}
+      />
     </Paper>
   );
 }

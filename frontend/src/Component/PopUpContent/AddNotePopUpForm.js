@@ -8,7 +8,13 @@ const initialValues = {
   title: "",
   discription: "",
 };
-export default function AddNotePopUpForm({ data, setOpen, setNotify }) {
+export default function AddNotePopUpForm({
+  data,
+  setOpen,
+  setNotify,
+  setRefetch,
+  refetch,
+}) {
   if (data) {
     initialValues.title = data.title;
     initialValues.discription = data.discription;
@@ -69,6 +75,7 @@ export default function AddNotePopUpForm({ data, setOpen, setNotify }) {
       });
       setOpen(false);
       setLoading(false);
+      setRefetch(!refetch);
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -106,6 +113,7 @@ export default function AddNotePopUpForm({ data, setOpen, setNotify }) {
         title: "success",
       });
       setOpen(false);
+      setRefetch(!refetch);
     } catch (err) {
       setLoading(false);
       console.log(err);

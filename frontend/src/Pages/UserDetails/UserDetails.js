@@ -30,9 +30,10 @@ export default function UserDetails() {
   const [open, setOpen] = useState(false);
   const [notes, setNotes] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [refetch, setRefetch] = useState(false);
   const [count, setCount] = useState(1);
   const [page, setPage] = useState(0);
-  const [search, setSearch] = useState("Daring Mary McCallister");
+  const [search, setSearch] = useState("");
   const { userInfo } = useSelector((state) => state.user);
   const handleOpen = () => {
     setOpen(true);
@@ -78,7 +79,7 @@ export default function UserDetails() {
   };
   useEffect(() => {
     fetchData();
-  }, [page, search, open]);
+  }, [page, search, open, refetch]);
   return (
     <>
       <NavBar />
@@ -149,6 +150,8 @@ export default function UserDetails() {
                       key={index}
                       setOpen={setOpen}
                       setNotify={setNotify}
+                      setRefetch={setRefetch}
+                      refetch={refetch}
                     />
                   ))}
                 {notes && notes.length === 0 && (
