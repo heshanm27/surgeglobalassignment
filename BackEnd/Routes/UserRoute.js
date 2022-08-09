@@ -8,5 +8,4 @@ const {
 
 router.route("/").get(getUsersDetails);
 router.route("/:id").get(getUserDetailsById);
-
 module.exports = router;

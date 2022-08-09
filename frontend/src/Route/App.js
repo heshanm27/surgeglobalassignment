@@ -9,7 +9,7 @@ import UserDetailsForm from "../Pages/newUserDetailsForm/UserDetailsForm";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  const { userInfo, loggedIn } = useSelector((state) => state.user);
+  const { loggedIn } = useSelector((state) => state.user);
   return (
     <>
       <Routes>
@@ -18,11 +18,9 @@ function App() {
           path="/signIn"
           element={loggedIn ? <ProtectedRoute /> : <SignIn />}
         />
-        <Route element={<ProtectedRoute />}>
-          <Route path="/newuser" element={<UserDetailsForm />} />
-          <Route path="/admin" element={<AdminDetails />} />
-          <Route path="/user" element={<UserDetails />} />
-        </Route>
+        <Route path="/newuser" element={<UserDetailsForm />} />
+        <Route path="/admin" element={<AdminDetails />} />
+        <Route path="/user" element={<UserDetails />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

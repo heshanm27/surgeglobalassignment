@@ -13,8 +13,9 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import CustomSnackBar from "../../Component/CustomSnackBar/CustomSnackBar";
 import { useSelector, useDispatch } from "react-redux";
 import { SignInUser } from "../../Redux/userSlice";
-import { useNavigate } from "react-router-dom";
+
 import CustomPasswordInput from "../../Component/PasswordInput/CustomPasswordInput";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   email: "",
@@ -51,13 +52,6 @@ export default function SignIn() {
     });
     // //if all the proprties valid to the function that provide in every() it will return true  or if one fail it return false
     return Object.values(temp).every((x) => x == "");
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
   };
 
   /**

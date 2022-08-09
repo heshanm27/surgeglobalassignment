@@ -14,13 +14,13 @@ export default function ProtectedRoute() {
   if (!loggedIn) {
     navigate("/signIn");
     return <SignIn />;
-  } else if (userInfo.user.status) {
+  } else if (userInfo.user ? userInfo.user.status : false) {
     navigate("/newuser");
     return <UserDetailsForm />;
-  } else if (userInfo.user.accountType === "admin") {
+  } else if (!userInfo.user.status && userInfo.user.accountType === "admin") {
     navigate("/admin");
     return <AdminDetails />;
-  } else if (userInfo.user.accountType === "user") {
+  } else if (!userInfo.user.status && userInfo.user.accountType === "user") {
     navigate("/user");
     return <UserDetails />;
   }

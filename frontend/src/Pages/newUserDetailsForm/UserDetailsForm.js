@@ -7,9 +7,12 @@ import Container from "@mui/material/Container";
 import { Paper, Stack } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import NavBar from "../../Component/NavBar/NavBar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CustomPasswordInput from "../../Component/PasswordInput/CustomPasswordInput";
+import { useSelector, useDispatch } from "react-redux";
 import { Box } from "@mui/system";
+import { UpdateUserDetails } from "../../Redux/userSlice";
+import CustomSnackBar from "../../Component/CustomSnackBar/CustomSnackBar";
 
 const initialValues = {
   firstName: "",
@@ -23,6 +26,17 @@ const initialValues = {
 export default function UserDetailsForm() {
   const [errors, setErrors] = useState(initialValues);
   const [values, setValues] = useState(initialValues);
+  const dispatch = useDispatch();
+  const { pending, error, errorMessage, userInfo } = useSelector(
+    (state) => state.user
+  );
+  //customer snackbar props
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "error",
+    title: "",
+  });
 
   /**
    *
@@ -48,7 +62,11 @@ export default function UserDetailsForm() {
         ? ""
         : "Please enter valid mobile number") ||
       (values.mobile ? "" : "Please enter mobile number");
-    temp.password = values.password ? "" : "Please enter password";
+    temp.password =
+      (values.password ? "" : "Please enter password") ||
+      (values.password.length < 6
+        ? "Password must be at least 6 characters long"
+        : "");
     temp.confirmPassword =
       (values.password === values.confirmPassword
         ? ""
@@ -59,7 +77,6 @@ export default function UserDetailsForm() {
       ...temp,
     });
 
-    console.log(temp);
     // //if all the proprties valid to the function that provide in every() it will return true  or if one fail it return false
     return Object.values(temp).every((x) => x == "");
   };
@@ -68,9 +85,27 @@ export default function UserDetailsForm() {
     event.preventDefault();
     console.log(values);
     if (validate()) {
+      console.log(userInfo.user._id, userInfo);
+      dispatch(
+        UpdateUserDetails({
+          updateValue: values,
+          userId: userInfo.user._id,
+          token: userInfo.token,
+        })
+      );
     }
   };
 
+  React.useEffect(() => {
+    if (error) {
+      setNotify({
+        isOpen: true,
+        message: errorMessage,
+        type: "error",
+        title: "Error",
+      });
+    }
+  }, [error]);
   return (
     <>
       <NavBar />
@@ -148,7 +183,7 @@ export default function UserDetailsForm() {
                       placeholder="Date Of Birth"
                       fullWidth
                       type="date"
-                      variant="filled"
+                      variant="standard"
                       error={errors.dateOfBirth ? true : false}
                       helperText={errors.dateOfBirth}
                     />
@@ -156,6 +191,7 @@ export default function UserDetailsForm() {
 
                   <Grid item xs={12}>
                     <CustomPasswordInput
+                      title="Reset Password"
                       values={values}
                       error={Boolean(errors.password)}
                       errorsMsg={errors.password}
@@ -181,6 +217,7 @@ export default function UserDetailsForm() {
                       fullWidth
                       variant="contained"
                       sx={{ mt: 3, mb: 1 }}
+                      loading={pending}
                       size="large"
                       loadingPosition="center"
                     >
@@ -191,6 +228,7 @@ export default function UserDetailsForm() {
               </Box>
             </Stack>
           </Paper>
+          <CustomSnackBar notify={notify} setNotify={setNotify} />
         </Stack>
       </Container>
     </>

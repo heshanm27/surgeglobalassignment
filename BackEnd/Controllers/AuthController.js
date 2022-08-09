@@ -71,4 +71,17 @@ const signIn = async (req, res) => {
   res.status(StatusCodes.OK).json({ token, user });
 };
 
-module.exports = { signUp, signIn };
+const updateUserDetailsById = async (req, res) => {
+  console.log(req.params.id, req.body);
+  const dataset = {
+    ...req.body,
+    status: false,
+  };
+  const user = await userModel.findByIdAndUpdate(req.params.id, dataset, {
+    new: true,
+    validator: true,
+  });
+  res.status(200).json({ user });
+};
+
+module.exports = { signUp, signIn, updateUserDetailsById };
