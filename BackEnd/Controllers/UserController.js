@@ -28,17 +28,6 @@ const getUsersDetails = async (req, res) => {
   res.status(200).json({ users, usersCount });
 };
 
-const getUserDetailsById = async (req, res) => {
-  const user = await userModel.findById(req.params.id);
-
-  if (!user) {
-    throw new CustomAPIError("User not found", 404);
-  }
-
-  res.status(200).json(user);
-};
-
 module.exports = {
   getUsersDetails,
-  getUserDetailsById,
 };

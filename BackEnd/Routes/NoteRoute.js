@@ -3,17 +3,14 @@ const router = express.Router();
 
 const {
   getNotesDetails,
-  getNoteDetailsById,
   postNoteDetails,
   updateNoteDetails,
   deleteNoteDetails,
 } = require("../Controllers/NoteController");
 
+//default note route
 router.route("/").get(getNotesDetails).post(postNoteDetails);
-router
-  .route("/:id")
-  .get(getNoteDetailsById)
-  .patch(updateNoteDetails)
-  .delete(deleteNoteDetails);
+//paramterised note route
+router.route("/:id").patch(updateNoteDetails).delete(deleteNoteDetails);
 
 module.exports = router;

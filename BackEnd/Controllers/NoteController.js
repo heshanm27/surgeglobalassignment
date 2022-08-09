@@ -1,16 +1,20 @@
+const { default: mongoose } = require("mongoose");
 const { CustomAPIError } = require("../Errors/errorClases");
 const noteModel = require("../Models/NoteModel");
 
 const getNotesDetails = async (req, res) => {
   const search = String(req.query.search);
+  const id = String(req.query.id);
+  console.log(id);
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 5;
   const skip = (page - 1) * limit;
-  let notesCount = await noteModel.find({}).count();
+  let notesCount = await noteModel.find({ createdBy: id }).count();
   let notes = await noteModel
     .aggregate([
       {
         $match: {
+          createdBy: mongoose.Types.ObjectId(id),
           $or: [
             { title: { $regex: search, $options: "si" } },
             { discription: { $regex: search, $options: "i" } },
@@ -21,16 +25,9 @@ const getNotesDetails = async (req, res) => {
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit);
+  console.log(notes);
   notesCount = Math.ceil(notesCount / limit);
   res.status(200).json({ notes, notesCount });
-};
-
-const getNoteDetailsById = async (req, res) => {
-  const note = await noteModel.findById(req.params.id);
-  if (!note) {
-    throw new CustomAPIError("note not found", 404);
-  }
-  res.status(200).json(note);
 };
 
 const postNoteDetails = async (req, res) => {
@@ -60,7 +57,6 @@ const deleteNoteDetails = async (req, res) => {
 
 module.exports = {
   getNotesDetails,
-  getNoteDetailsById,
   postNoteDetails,
   updateNoteDetails,
   deleteNoteDetails,

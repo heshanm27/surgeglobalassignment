@@ -70,6 +70,12 @@ export default function SignUp() {
         await signUp(values.email);
         setValues(initialValues);
         setLoading(false);
+        setNotify({
+          isOpen: true,
+          message: `Check Your Email To Login Details`,
+          type: "success",
+          title: "Success",
+        });
       } catch (err) {
         setErrors({
           ...errors,

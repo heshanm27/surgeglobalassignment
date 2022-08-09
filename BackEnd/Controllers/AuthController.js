@@ -47,7 +47,7 @@ const signUp = async (req, res) => {
 
 const signIn = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
+
   let user = await userModel.findOne({ email });
 
   if (!user) {
@@ -81,7 +81,7 @@ const updateUserDetailsById = async (req, res) => {
     new: true,
     validator: true,
   });
-  res.status(200).json({ user });
+  res.status(200).json({ user, token });
 };
 
 module.exports = { signUp, signIn, updateUserDetailsById };

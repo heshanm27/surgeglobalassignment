@@ -56,7 +56,7 @@ export default function UserDetails() {
     };
     try {
       const { data } = await publicRequest.get(
-        `note?page=${page}&search=${search}`,
+        `note?id=${userInfo.user._id}&page=${page}&search=${search}`,
         axiosConfig
       );
       console.log(data.notes);
