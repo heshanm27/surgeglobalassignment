@@ -24,11 +24,10 @@ const initialValues = {
 
 export default function SignIn() {
   const [errors, setErrors] = useState(initialValues);
-  const [loading, setLoading] = useState(false);
   const [values, setValues] = useState(initialValues);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { pending, error, errorMessage, userInfo, loggedIn } = useSelector(
+  const { pending, error, errorMessage, loggedIn } = useSelector(
     (state) => state.user
   );
   //customer snackbar props
@@ -127,6 +126,7 @@ export default function SignIn() {
               onChange={handleChanges}
               label="Email Address"
               name="email"
+              type="email"
               autoComplete="email"
               error={errors.email ? true : false}
               helperText={errors.email}
@@ -134,7 +134,8 @@ export default function SignIn() {
 
             <CustomPasswordInput
               values={values}
-              errors={errors}
+              error={Boolean(errors.password)}
+              errorsMsg={errors.password}
               setValues={setValues}
               handleChanges={handleChanges}
             />

@@ -11,9 +11,12 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 export default function CustomPasswordInput({
+  title,
   label,
-  errors,
+  error,
+  errorsMsg,
   values,
+  customvalue,
   setValues,
   handleChanges,
 }) {
@@ -25,8 +28,8 @@ export default function CustomPasswordInput({
   };
   return (
     <FormControl fullWidth variant="outlined">
-      <InputLabel error={errors.password ? true : false} htmlFor="password">
-        {label ? label : "Password"}
+      <InputLabel error={errorsMsg ? true : false} htmlFor="password">
+        {title ? title : "Password"}
       </InputLabel>
       <OutlinedInput
         autoComplete="current-password"
@@ -34,9 +37,9 @@ export default function CustomPasswordInput({
         name={label ? label : "password"}
         label={label ? label : "password"}
         type={values.showPassword ? "text" : "password"}
-        value={values.password}
+        value={values ? customvalue : values.password}
         onChange={handleChanges}
-        error={errors.password ? true : false}
+        error={error}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -49,9 +52,7 @@ export default function CustomPasswordInput({
           </InputAdornment>
         }
       />
-      <FormHelperText error={errors.password ? true : false}>
-        {errors.password}
-      </FormHelperText>
+      <FormHelperText error={error}>{errorsMsg}</FormHelperText>
     </FormControl>
   );
 }
