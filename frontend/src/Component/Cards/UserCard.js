@@ -30,6 +30,13 @@ export default function UserCard({ data }) {
             >
               Email:{data.email}
             </Typography>
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              component="div"
+            >
+              UserID-:{data.id}
+            </Typography>
           </Box>
         </Stack>
       </Paper>

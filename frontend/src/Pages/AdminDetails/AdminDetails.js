@@ -159,6 +159,7 @@ export default function AdminDetails() {
             </Grid>
           </Grid>
         </Stack>
+        <CustomSnackBar notify={notify} setNotify={setNotify} />
       </Container>
     </>
   );

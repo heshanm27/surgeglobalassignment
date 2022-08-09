@@ -8,13 +8,16 @@ const getNotesDetails = async (req, res) => {
   const skip = (page - 1) * limit;
   let notesCount = await noteModel.find({}).count();
   let notes = await noteModel
-    .find({
-      $or: [
-        {
-          title: { $regex: search, $options: "i" },
+    .aggregate([
+      {
+        $match: {
+          $or: [
+            { title: { $regex: search, $options: "si" } },
+            { discription: { $regex: search, $options: "i" } },
+          ],
         },
-      ],
-    })
+      },
+    ])
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit);

@@ -12,12 +12,14 @@ export default function UserPopUpDetails({ data }) {
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" component="div">
         Date Of Birth:
-        {`${new Date(data.dateOfBirth).getFullYear()}/${new Date(
-          data.dateOfBirth
-        ).getMonth()}/${new Date(data.dateOfBirth).getDay()}`}
+        {data.dateOfBirth
+          ? `${new Date(data.dateOfBirth).getFullYear()}/${new Date(
+              data.dateOfBirth
+            ).getMonth()}/${new Date(data.dateOfBirth).getDay()}`
+          : "N/A"}
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" component="div">
-        Mobile:{data.mobile}
+        {data.mobile ? "Mobile-:" + data.mobile : "Mobile-:Not Available"}
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" component="div">
         Status:{data.status ? "New" : "Old"}
