@@ -14,11 +14,11 @@ import React from "react";
 
 import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/userSlice";
-
+import { useSelector } from "react-redux";
 export default function NavBar() {
   const theme = useTheme();
   const dispatch = useDispatch();
-
+  const { userInfo } = useSelector((state) => state.user);
   const [anchorEl, setAnchorEl] = React.useState(null);
   //hadnle popup menu
   const handleClick = (event) => {
@@ -43,7 +43,11 @@ export default function NavBar() {
             </Typography>
 
             <IconButton sx={{ p: 0 }} onClick={handleClick}>
-              <Avatar sx={{ bgcolor: theme.palette.primary.light }}>H</Avatar>
+              <Avatar sx={{ bgcolor: theme.palette.primary.light }}>
+                {userInfo.user.firstName
+                  ? userInfo.user.firstName.charAt(0).toUpperCase()
+                  : userInfo.user.email.charAt(0).toUpperCase()}
+              </Avatar>
             </IconButton>
           </Toolbar>
           {/** Pop Up Menu*/}
