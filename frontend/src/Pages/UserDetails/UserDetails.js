@@ -1,5 +1,6 @@
 import {
   Button,
+  CircularProgress,
   Container,
   FormControl,
   Grid,
@@ -13,43 +14,71 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
 import SearchIcon from "@mui/icons-material/Search";
 import NoteCard from "../../Component/Cards/NoteCard";
 import AddNotePopUpForm from "../../Component/PopUpContent/AddNotePopUpForm";
 import CustomePopUp from "../../Component/PopUp/CustomePopUp";
 import { useState } from "react";
+import { publicRequest } from "../../DefaultAxios/defultaxios";
+import { useSelector } from "react-redux";
 import NavBar from "../../Component/NavBar/NavBar";
+import CustomSnackBar from "../../Component/CustomSnackBar/CustomSnackBar";
+import CloseIcon from "@mui/icons-material/Close";
 export default function UserDetails() {
   const [open, setOpen] = useState(false);
-
+  const [notes, setNotes] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(1);
+  const [page, setPage] = useState(0);
+  const [search, setSearch] = useState("Daring Mary McCallister");
+  const { userInfo } = useSelector((state) => state.user);
   const handleOpen = () => {
     setOpen(true);
   };
 
-  const data = [
-    {
-      title: "The Smooth Kiss",
-      discription:
-        "There was something beautiful in his hate. It wasn't the hate itself as it was a disgusting display of racism and intolerance. It was what propelled the hate and the fact that although he had this hate, he didn't understand where it came from. It was at that moment that she realized that there was hope in changing him.",
-    },
-    {
-      title: "Girl of Boy",
-      discription:
-        "There was something beautiful in his hate. It wasn't the hate itself as it was a disgusting display of racism and intolerance. It was what propelled the hate and the fact that although he had this hate, he didn't understand where it came from. It was at that moment that she realized that there was hope in changing him.",
-    },
-    {
-      title: "The World's Stones",
-      discription:
-        "There was something beautiful in his hate. It wasn't the hate itself as it was a disgusting display of racism and intolerance. It was what propelled the hate and the fact that although he had this hate, he didn't understand where it came from. It was at that moment that she realized that there was hope in changing him.",
-    },
-    {
-      title: "The Witches of the Sword",
-      discription:
-        "There was something beautiful in his hate. It wasn't the hate itself as it was a disgusting display of racism and intolerance. It was what propelled the hate and the fact that although he had this hate, he didn't understand where it came from. It was at that moment that she realized that there was hope in changing him.",
-    },
-  ];
+  //customer snackbar props
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "error",
+    title: "",
+  });
+
+  const fetchData = async () => {
+    setLoading(true);
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    try {
+      const { data } = await publicRequest.get(
+        `note?page=${page}&search=${search}`,
+        axiosConfig
+      );
+      console.log(data.notes);
+      setLoading(false);
+      setNotes(data.notes);
+      setCount(data.notesCount);
+    } catch (err) {
+      console.log(err);
+      setNotify({
+        isOpen: true,
+        message: err.response.data.msg,
+        type: "error",
+        title: "Error",
+      });
+    }
+  };
+
+  const handleChange = async (event, value) => {
+    setPage(value);
+  };
+  useEffect(() => {
+    fetchData();
+  }, [page, search]);
   return (
     <>
       <NavBar />
@@ -67,11 +96,24 @@ export default function UserDetails() {
                       <Input
                         id="standard-adornment-search"
                         placeholder="Search by Title"
+                        value={search}
+                        onChange={(e) => {
+                          setSearch(e.target.value);
+                        }}
                         endAdornment={
                           <InputAdornment position="end">
                             <Tooltip title="Search">
-                              <IconButton aria-label="search function">
-                                <SearchIcon />
+                              <IconButton
+                                aria-label="search function"
+                                onClick={() => {
+                                  setSearch("");
+                                }}
+                              >
+                                {search.length === 0 ? (
+                                  <SearchIcon />
+                                ) : (
+                                  <CloseIcon />
+                                )}
                               </IconButton>
                             </Tooltip>
                           </InputAdornment>
@@ -100,10 +142,30 @@ export default function UserDetails() {
                 <Typography color="primary" variant="h4" align="center">
                   Notes{" "}
                 </Typography>
-                {data.map((item, index) => (
-                  <NoteCard data={item} key={index} />
-                ))}
-
+                {notes &&
+                  notes.map((item, index) => (
+                    <NoteCard data={item} key={index} />
+                  ))}
+                {notes && notes.length === 0 && (
+                  <Typography
+                    sx={{ mt: 5 }}
+                    variant="body2"
+                    align="center"
+                    color="info"
+                  >
+                    No data to show{" "}
+                  </Typography>
+                )}
+                {loading && (
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    sx={{ mt: 5 }}
+                  >
+                    <CircularProgress width="100px" color="primary" />
+                  </Stack>
+                )}
                 <Stack
                   direction="row"
                   alignItems="center"
@@ -113,18 +175,22 @@ export default function UserDetails() {
                   {/**Pagination Component */}
                   <Pagination
                     size="small"
-                    count={10}
+                    color="primary"
+                    count={count}
+                    page={page}
+                    defaultPage={page}
+                    onChange={handleChange}
                     variant="outlined"
-                    shape="rounded"
                   />
                 </Stack>
               </Paper>
             </Grid>
           </Grid>
         </Stack>
+        <CustomSnackBar notify={notify} setNotify={setNotify} />
         {/**CusomePopup call with props */}
         <CustomePopUp open={open} setOpen={setOpen} title={"Create new note"}>
-          <AddNotePopUpForm />
+          <AddNotePopUpForm data={{}} />
         </CustomePopUp>
       </Container>
     </>

@@ -51,7 +51,7 @@ export default function UserDetailsForm() {
     });
   };
 
-  //validate email
+  //validate textfiled
   const validate = () => {
     let temp = {};
     temp.firstName = values.firstName ? "" : "Please enter first name";

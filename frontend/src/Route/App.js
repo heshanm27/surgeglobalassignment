@@ -18,9 +18,15 @@ function App() {
           path="/signIn"
           element={loggedIn ? <ProtectedRoute /> : <SignIn />}
         />
-        <Route path="/newuser" element={<UserDetailsForm />} />
+        <Route
+          path="/newuser"
+          element={loggedIn ? <SignIn /> : <UserDetailsForm />}
+        />
         <Route path="/admin" element={<AdminDetails />} />
-        <Route path="/user" element={<UserDetails />} />
+        <Route
+          path="/user"
+          element={!loggedIn ? <SignIn /> : <UserDetails />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

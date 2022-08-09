@@ -2,17 +2,26 @@ const { CustomAPIError } = require("../Errors/errorClases");
 const noteModel = require("../Models/NoteModel");
 
 const getNotesDetails = async (req, res) => {
+  const search = String(req.query.search);
+  console.log(req.query.search);
+  console.log(search);
   const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.limit) || 4;
+  const limit = Number(req.query.limit) || 10;
   const skip = (page - 1) * limit;
-
+  let notesCount = await noteModel.find({}).count();
   let notes = await noteModel
-    .find({})
+    .find({
+      $or: [
+        {
+          title: { $regex: search, $options: "i" },
+        },
+      ],
+    })
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit);
-
-  res.status(200).json(notes);
+  notesCount = Math.ceil(notesCount / limit);
+  res.status(200).json({ notes, notesCount });
 };
 
 const getNoteDetailsById = async (req, res) => {
@@ -43,7 +52,6 @@ const deleteNoteDetails = async (req, res) => {
     });
     res.status(200).json(note);
   } catch (err) {
-    console.log(err.reason.BSONTypeError);
     throw new CustomAPIError("User not found", 404);
   }
 };

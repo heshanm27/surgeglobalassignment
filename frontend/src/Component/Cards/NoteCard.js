@@ -7,10 +7,17 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import CustomePopUp from "../PopUp/CustomePopUp";
+import AddNotePopUpForm from "../PopUpContent/AddNotePopUpForm";
 export default function NoteCard({ data }) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <Paper sx={{ mt: 5 }}>
       <Grid container justify="center" alignItems="center">
@@ -41,7 +48,7 @@ export default function NoteCard({ data }) {
           }}
         >
           <Tooltip title="Edit ">
-            <IconButton aria-label="next" color="info">
+            <IconButton aria-label="next" color="info" onClick={handleOpen}>
               <EditIcon />
             </IconButton>
           </Tooltip>
@@ -52,6 +59,9 @@ export default function NoteCard({ data }) {
           </Tooltip>
         </Grid>
       </Grid>
+      <CustomePopUp open={open} setOpen={setOpen} title={"Update Note"}>
+        <AddNotePopUpForm data={data} />
+      </CustomePopUp>
     </Paper>
   );
 }
