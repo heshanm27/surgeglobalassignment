@@ -1,5 +1,7 @@
+const { default: mongoose } = require("mongoose");
 const connectDB = require("../DataBase/DataBaseConnetion");
 const UserModel = require("../Models/UserModel");
+
 require("dotenv").config();
 
 //run using command node SeedFile/SeedAdmin.js
@@ -22,9 +24,11 @@ async function addAdmin() {
     await connectDB(process.env.MONGO_URI);
     adminInfo.id = (await UserModel.gearateId()) + 1;
     const user = await UserModel.create(adminInfo);
+    mongoose.connection.close();
     console.log(user);
   } catch (error) {
     console.log(error);
+    mongoose.connection.close();
   }
 }
 addAdmin();

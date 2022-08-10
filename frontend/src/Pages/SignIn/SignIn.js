@@ -148,12 +148,6 @@ export default function SignIn() {
               Sign In
             </LoadingButton>
             <Grid container>
-              <Grid item xs>
-                <Link href="/signIn" variant="body2">
-                  Forgot password?
-                  <span>{errorMessage}</span>
-                </Link>
-              </Grid>
               <Grid item>
                 <Link href="/" variant="body2">
                   {"Don't have an account? Sign Up"}
