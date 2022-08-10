@@ -30,9 +30,6 @@ export default function UserList() {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
   const { userInfo } = useSelector((state) => state.user);
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   //customer snackbar props
   const [notify, setNotify] = useState({

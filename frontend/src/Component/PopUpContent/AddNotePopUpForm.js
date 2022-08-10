@@ -1,4 +1,4 @@
-import { Box, Button, Stack, TextField } from "@mui/material";
+import { Box, Stack, TextField } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import React, { useState } from "react";
 
@@ -36,7 +36,7 @@ export default function AddNotePopUpForm({
       ...temp,
     });
     // //if all the proprties valid to the function that provide in every() it will return true  or if one fail it return false
-    return Object.values(temp).every((x) => x == "");
+    return Object.values(temp).every((x) => x === "");
   };
 
   /**

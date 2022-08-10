@@ -48,7 +48,7 @@ export default function SignUp() {
       ...temp,
     });
     // //if all the proprties valid to the function that provide in every() it will return true  or if one fail it return false
-    return Object.values(temp).every((x) => x == "");
+    return Object.values(temp).every((x) => x === "");
   };
 
   /**
