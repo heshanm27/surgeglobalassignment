@@ -1,6 +1,4 @@
-/**
- * @description CutomeError Class With Extends from default Error Class
- */
+// CutomeError Class With Extends from default Error Class
 class CustomAPIError extends Error {
   constructor(message, statusCode) {
     super(message);
