@@ -7,9 +7,9 @@ In this projets users an enter notes
 
 In this project have both frontend and backend
 
-Backend : Node.Js,ExpressJs
-Frontend : React.js
-Database : MongoDB
+Backend : Node.Js,ExpressJs<br/>
+Frontend : React.js<br/>
+Database : MongoDB<br/>
 
 #Project Flow
 1-The first user can sign up using their email address.
