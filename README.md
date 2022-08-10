@@ -3,9 +3,9 @@
 Internship Assignment For the Surge Global
 
 **Project Discription**<br/>
-In this project, users can enter, delete, edit, and search for notes. Also, the admin user can get details about each user's , search for each user. In this project, both the frontend and backend are created using Mern Stack technologies. For authentication, use a jwt token. In front-end management, this project uses the Redux state management library.
+In this project, users can enter, delete, edit, and search for notes. Also, the admin user can get details about each user's , search for each user. In this project, both the frontend and server are created using Mern Stack technologies. For authentication, use a jwt token. In front-end management, this project uses the Redux state management library,Nodemailer package use for send emails.
 
-Backend : Node.Js,ExpressJs<br/>
+server : Node.Js,ExpressJs<br/>
 Frontend : React.js<br/>
 Database : MongoDB<br/>
 
@@ -36,7 +36,7 @@ Database : MongoDB<br/>
 - redux-toolkit and redux-presist (state management and persist data)
 - mui (Ui Component)
 
-> BackEnd
+> server
 
 - ExpressJs (manage routes)
 - bcryptjs (encrypt password)
@@ -52,9 +52,9 @@ Database : MongoDB<br/>
 
 > Environment variables setup
 
-- `cd BackEnd `(Change directory to the frontend folder)
+- `cd server `(Change directory to the server folder)
 
-- Setup .env file in BackEnd directory
+- Setup .env file in server directory
 
 **_Environment variables _**
 ` MONGO_URI=MongoDb Atlas Url`</br>
@@ -83,10 +83,55 @@ Database : MongoDB<br/>
 
 - `npm start `(Start the development server)
 
-> Backend Setup
+> server Setup
 
-- `cd BackEnd `(Change directory to the frontend folder)
+- `cd server `(Change directory to the frontend folder)
 
 - `npm install` (Install all the npm packages)
 
 - `npm start || node index.js` (Start the development server)
+
+**Written Questionnaire**
+
+> Explaining what is design pattern and how we can use design patterns in
+> projects.
+
+- Design patterns represent the best practices used in object-oriented software development. Design patterns are general problems that come up in software development .As an example, when we need to implement undo data, we can use the memento design pattern. As such, there are different design patterns for different use cases. We have three main design pattern types in the Gang of Four design patterns, such as
+
+  - Creational Patterns:-based solutions for object creation
+  - Structural Patterns: Using the concept of inharitance, how do we obtain new functionalities?
+  - Behavioral Patterns-solution for ommunation between objects
+
+> What is DTO and explain the use of it.
+
+- DTO mean (Data transfer object).DTO is used for facilitating communication between two systems without exposing sensitive information.DTO minimize boilerplate and make it more readable the code
+
+> How are you going to store secrets in an application without exposing it to the
+> internet?
+
+- we use the env(environment variables) file to store secrets without exposing them to the outside
+
+> What is JWT and how does it work?
+
+- Token, is a compact and self-contained way for securely transmitting information between parties as a JSON object. JWT Token is created in the 3 parts and they are
+  Header - This header tells the server what type of signature is being used
+  Payload - data that we can provide usually we store data to identify the user (ex - userid,usertype)
+  Signature-mark the token
+
+First Jwt combined header, payload, and secret then encrypt after that it will add a signature and return the token
+
+> What is the difference between SQL and NoSQL databases?
+
+- SQL
+- SQL databases are relational
+- used with multi-row transactions
+- save data in table-based
+
+- NoSQL
+- NoSQL databases are non-relational
+- used with unstructured data like documents or JSON
+- save data in document, key-value pair, graph
+
+> Suggest a good state management for frontend application and explain why you recommend it.
+
+- We use state management to store states that can access the whole app when the state changes reflect that change everywhere that state is used. According to my experience in React, there is a built-in state management tool called contextapi. The main problem with the context API is that if we change the state of one state, it will re-render every component that the state used. As a result, the redux state management library will resolve this issue. In my experience, I would recommend Redux as good state management.
