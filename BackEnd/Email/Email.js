@@ -1,6 +1,13 @@
 const nodemailer = require("nodemailer");
 
+/**
+ * @description - This function is used to send email with nodemailer
+ * @param {String} email
+ * @param {String} tempPassword
+ * @returns
+ */
 const sendEmail = async (email, tempPassword) => {
+  //create transpoter object with nodemailer
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -9,6 +16,7 @@ const sendEmail = async (email, tempPassword) => {
     },
   });
 
+  //create mail options object with nodemailer with all data to send email
   const mailOptions = {
     from: `SurgeGlobal Assigment ${process.env.ADMIN_MAIL}`,
     to: `${email}`,
@@ -19,6 +27,7 @@ const sendEmail = async (email, tempPassword) => {
         `,
   };
 
+  //send email with nodemailer
   const result = await transporter.sendMail(mailOptions);
 
   if (result) {

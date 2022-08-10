@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//connect to mongoDB Atlas
 const connectDB = (url) => {
   return mongoose
     .connect(url, {
