@@ -66,9 +66,9 @@ Database : MongoDB<br/>
 
 **How to get mailApp password in gmail**
 
-- First login into the admin email and go your Google Account
+- First login into the admin email and go to your Google Account
 - Then select security page
-- In Signing to google title
+- Inside Signing to google title
 - You will see app passwords button
 - After click app passwords button it will asks again to login
 - After login you will redirect to page from there
