@@ -5,6 +5,12 @@ const {
   CustomAPIError,
 } = require("../Errors/errorClases");
 
+/**
+ *
+ * @description middleware for the authentication of the Admin user with the JWT Token
+ * if token invalid throw error
+ * if token valid and user is a admin return next() to continue the request
+ */
 const authenticationAdmin = async (req, res, next) => {
   // check header
   const authHeader = req.headers.authorization;
@@ -37,6 +43,12 @@ const authenticationAdmin = async (req, res, next) => {
   }
 };
 
+/**
+ *
+ * @description middlewre for the authentication of the user with the JWT Token
+ * if token invalid throw error
+ * if token valid  return next() to continue the request
+ */
 const authenticationUser = async (req, res, next) => {
   // check header
   const authHeader = req.headers.authorization;
