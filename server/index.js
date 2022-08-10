@@ -17,9 +17,9 @@ const cors = require("cors");
 const connectDB = require("./DataBase/DataBaseConnetion");
 
 //Router moduel imports
-const authRoute = require("./routes/AuthRoute");
+const authRoute = require("./Routes/AuthRoute");
 const noteRoute = require("./Routes/NoteRoute");
-const userRoute = require("./routes/UserRoute");
+const userRoute = require("./Routes/UserRoute");
 
 //cors policy configuration
 const corsOptions = {
