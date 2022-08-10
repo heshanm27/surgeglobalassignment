@@ -33,16 +33,16 @@ Database : MongoDB<br/>
 
 > Front End Setup
 
-- cd frontend(Change directory to the frontend folder)
+- `cd frontend `(Change directory to the frontend folder)
 
-- npm install (Install all the npm packages)
+- `npm install `(Install all the npm packages)
 
-- npm start (Start the development server)
+- `npm start `(Start the development server)
 
 > Backend Setup
 
-- cd BackEnd(Change directory to the frontend folder)
+- `cd BackEnd `(Change directory to the frontend folder)
 
-- npm install (Install all the npm packages)
+- `npm install` (Install all the npm packages)
 
-- npm start || node index.js (Start the development server)
+- `npm start || node index.js` (Start the development server)
