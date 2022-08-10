@@ -36,8 +36,9 @@ Database : MongoDB<br/>
 - redux-toolkit and redux-presist (state management and persist data)
 - mui (Ui Component)
 
-> BackEnd-ExpressJs (manage routes)
+> BackEnd
 
+- ExpressJs (manage routes)
 - bcryptjs (encrypt password)
 - cors (cross origin setting configuration)
 - dotenv (environment variable)
