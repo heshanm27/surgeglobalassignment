@@ -45,6 +45,7 @@ const signUp = async (req, res) => {
   }
 };
 
+//Sign In Function for users
 const signIn = async (req, res) => {
   const { email, password } = req.body;
 
@@ -78,6 +79,7 @@ const signIn = async (req, res) => {
   res.status(StatusCodes.OK).json({ token, user });
 };
 
+//update new user details
 const updateUserDetailsById = async (req, res) => {
   console.log(req.body);
   console.log(req.header);
