@@ -2,28 +2,47 @@
 
 Internship Assignment For the Surge Global
 
-#Project Discription
-In this projets users an enter notes
+**Project Discription**<br/>
+In this project, users can enter, delete, edit, and search for notes. Also, the admin user can get details about each user's , search for each user.
 
-In this project have both frontend and backend
+In this project, both the frontend and backend are created using Mern Stack technologies
 
 Backend : Node.Js,ExpressJs<br/>
 Frontend : React.js<br/>
 Database : MongoDB<br/>
 
-#Project Flow
-1-The first user can sign up using their email address.
+**Project Flow**<br/>
 
-2-After the signup, the server will send an email to the user with a temporary password.
+- The first user can sign up using their email address.
 
-3-using temporary password user will be able to sign in to the application.
+- After the signup, the server will send an email to the user with a temporary password.
 
-4 - if user status is true, it is considered a new user and the user will be redirected to the new user profile details form.
+- using temporary password user will be able to sign in to the application.
 
-5-after updating user details, the user will be directed to the notes list page.
+- if user status is true, it is considered a new user and the user will be redirected to the new user profile details form.
 
-6-The user can see all of the crud operations on the NoteList page.
+- after updating user details, the user will be directed to the notes list page.
 
-7-If an admin user signs in, he will be redirected to the userlist page.
+- The user can see all of the crud operations on the NoteList page.
 
-8-Administrators can view and search all user details on the userlist page.
+- If an admin user signs in, he will be redirected to the userlist page.
+
+- Administrators can view and search all user details on the userlist page.
+
+**Installation**
+
+> Front End Setup
+
+- cd frontend(Change directory to the frontend folder)
+
+- npm install (Install all the npm packages)
+
+- npm start (Start the development server)
+
+> Backend Setup
+
+- cd BackEnd(Change directory to the frontend folder)
+
+- npm install (Install all the npm packages)
+
+- npm start || node index.js (Start the development server)
