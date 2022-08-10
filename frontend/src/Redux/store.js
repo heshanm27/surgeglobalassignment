@@ -19,12 +19,15 @@ const persistConfig = {
   storage,
 };
 
+//combine reducers
 const rootReducer = combineReducers({
   user: userReducer,
 });
 
+//configure presist reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+//configure store with presist reducer
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>

@@ -19,7 +19,10 @@ export default function NavBar() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.user);
+
+  //anchor the pop up menu to element
   const [anchorEl, setAnchorEl] = React.useState(null);
+
   //hadnle popup menu
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,6 +31,7 @@ export default function NavBar() {
     setAnchorEl(null);
   };
 
+  //disptach redux action to logout the user
   const handleLogout = () => {
     dispatch(logout());
     handleClose();
@@ -41,7 +45,7 @@ export default function NavBar() {
             <Typography variant="h6" noWrap>
               LOGO
             </Typography>
-
+            {/* added character to avatar */}
             <IconButton sx={{ p: 0 }} onClick={handleClick}>
               <Avatar sx={{ bgcolor: theme.palette.primary.light }}>
                 {userInfo.user.firstName
@@ -50,7 +54,7 @@ export default function NavBar() {
               </Avatar>
             </IconButton>
           </Toolbar>
-          {/** Pop Up Menu*/}
+          {/** Pop Up Menu for logout*/}
           <Menu
             id="demo-positioned-menu"
             aria-labelledby="demo-positioned-button"

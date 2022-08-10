@@ -14,6 +14,8 @@ import NotListedLocationIcon from "@mui/icons-material/NotListedLocation";
 
 export default function ConfirmPopUp(props) {
   const theme = useTheme();
+
+  //style objets
   const titleIcon = {
     backgroundColor: theme.palette.error.contrastText,
     color: theme.palette.error.dark,
@@ -26,6 +28,7 @@ export default function ConfirmPopUp(props) {
     position: "absolute",
     top: theme.spacing(5),
   };
+
   const { confirmDialog, setConfirmDialog } = props;
   return (
     <Dialog open={confirmDialog.isOpen} sx={dialogStyls}>

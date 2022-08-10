@@ -1,6 +1,5 @@
 import {
   Box,
-  Container,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -14,6 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 export default function CustomePopUp({ open, setOpen, children, title }) {
   const theme = useTheme();
 
+  //style objects
   const displaywraper = {
     position: "absolute",
     top: 10,

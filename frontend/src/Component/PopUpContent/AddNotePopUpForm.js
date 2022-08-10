@@ -52,6 +52,7 @@ export default function AddNotePopUpForm({
     });
   };
 
+  //api call for update note with id
   const updateNoteData = async () => {
     setLoading(true);
     const axiosConfig = {
@@ -88,6 +89,7 @@ export default function AddNotePopUpForm({
     }
   };
 
+  //api call  to add note for the database
   const addNoteData = async () => {
     setLoading(true);
     const axiosConfig = {

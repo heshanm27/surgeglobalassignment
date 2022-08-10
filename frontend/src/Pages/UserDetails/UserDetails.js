@@ -154,6 +154,8 @@ export default function UserDetails() {
                       refetch={refetch}
                     />
                   ))}
+
+                {/* check if notes count is greater than 0 if condition match show no notes found */}
                 {notes && notes.length === 0 && (
                   <Typography
                     sx={{ mt: 5 }}
@@ -164,6 +166,8 @@ export default function UserDetails() {
                     No data to show{" "}
                   </Typography>
                 )}
+
+                {/* if loading state is true show  CircularProgress*/}
                 {loading && (
                   <Stack
                     direction="row"

@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { publicRequest } from "../DefaultAxios/defultaxios";
 
+//asyncThunk use to make async request to server and return the response
+//in this function user is sending the email,password to the server , get user token and user info
 export const SignInUser = createAsyncThunk(
   "user/signIn",
   async (credentials, { rejectWithValue }) => {
@@ -16,6 +18,8 @@ export const SignInUser = createAsyncThunk(
   }
 );
 
+//asyncThunk use to make async request to server and return the response
+//in this if useris new then send new data to update the user info in the server and get response as updated user info
 export const UpdateUserDetails = createAsyncThunk(
   "user/update",
   async (UpdateValues, { rejectWithValue }) => {
@@ -40,6 +44,8 @@ export const UpdateUserDetails = createAsyncThunk(
   }
 );
 
+//create user slice for redux store
+//SignInUser && UpdateUserDetails have eah pending,fulfilled,rejected status
 export const userSlice = createSlice({
   name: "user",
   initialState: {

@@ -1,20 +1,18 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import CustomePopUp from "../PopUp/CustomePopUp";
 import UserPopUpDetails from "../PopUpContent/UserPopUpDetails";
+
 export default function UserCard({ data }) {
-  useEffect(() => {
-    console.log("User card");
-    console.log(data);
-  }, []);
+  // states
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
-  const newdata = data;
+  //card that shows the user details to admin
   return (
     <motion.div whileHover={{ scale: 1.1, cursor: "pointer" }}>
       <Paper sx={{ mt: 5 }} onClick={handleOpen}>

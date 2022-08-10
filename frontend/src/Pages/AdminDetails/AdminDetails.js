@@ -113,11 +113,12 @@ export default function AdminDetails() {
                 <Typography color="primary" variant="h4" align="center">
                   User Details
                 </Typography>
-
+                {/* show data is users exits */}
                 {users &&
                   users.map((item, index) => (
                     <UserCard data={item} key={index} />
                   ))}
+                {/* show No data text ifno any users */}
                 {users && users.length === 0 && (
                   <Typography
                     sx={{ mt: 5 }}
@@ -128,6 +129,7 @@ export default function AdminDetails() {
                     No data to show{" "}
                   </Typography>
                 )}
+                {/* show CircularProgress if data is loading */}
                 {loading && (
                   <Stack
                     direction="row"
@@ -145,6 +147,7 @@ export default function AdminDetails() {
                   justifyContent="center"
                   sx={{ mt: 5 }}
                 >
+                  {/* show pagination according to data  count */}
                   <Pagination
                     size="small"
                     color="primary"

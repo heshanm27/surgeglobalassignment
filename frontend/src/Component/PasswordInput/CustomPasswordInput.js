@@ -20,6 +20,7 @@ export default function CustomPasswordInput({
   setValues,
   handleChanges,
 }) {
+  //handel input password type
   const handleClickShowPassword = () => {
     setValues({
       ...values,

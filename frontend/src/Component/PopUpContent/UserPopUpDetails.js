@@ -1,6 +1,7 @@
 import { Container, Typography } from "@mui/material";
 import React from "react";
 
+//user popup details component
 export default function UserPopUpDetails({ data }) {
   return (
     <Container sx={{ p: 1 }} s>

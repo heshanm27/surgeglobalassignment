@@ -15,18 +15,24 @@ import ConfirmPopUp from "../PopUp/ConfirmPopUp";
 import { publicRequest } from "../../DefaultAxios/defultaxios";
 import { useSelector } from "react-redux";
 export default function NoteCard({ data, setNotify, setRefetch, refetch }) {
+  //default states
   const [open, setOpenmodel] = useState(false);
   const { userInfo } = useSelector((state) => state.user);
+
+  //confirm dialog states
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
     title: "",
     subTitle: "",
     onConfirm: () => {},
   });
+
+  //handle open CustomePopUp
   const handleOpen = () => {
     setOpenmodel(true);
   };
 
+  //Api call to delete note with id
   const deleteNote = async () => {
     const axiosConfig = {
       headers: {
@@ -48,6 +54,7 @@ export default function NoteCard({ data, setNotify, setRefetch, refetch }) {
         type: "success",
         title: "success",
       });
+      //rerun useEffect in the userDetails file then api call to get the updated list of notes
       setRefetch(!refetch);
     } catch (err) {
       setNotify({
@@ -94,8 +101,9 @@ export default function NoteCard({ data, setNotify, setRefetch, refetch }) {
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete">
+            {/* onclick to open confirm dialog  */}
             <IconButton
-              aria-label="play/pause"
+              aria-label="delete popup"
               color="error"
               onClick={() =>
                 setConfirmDialog({
@@ -113,6 +121,7 @@ export default function NoteCard({ data, setNotify, setRefetch, refetch }) {
           </Tooltip>
         </Grid>
       </Grid>
+      {/* custome pop up with props need to pass the data and open state */}
       <CustomePopUp open={open} setOpen={setOpenmodel} title={"Update Note"}>
         <AddNotePopUpForm
           data={data}

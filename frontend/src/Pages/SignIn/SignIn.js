@@ -51,7 +51,7 @@ export default function SignIn() {
       ...temp,
     });
     // //if all the proprties valid to the function that provide in every() it will return true  or if one fail it return false
-    return Object.values(temp).every((x) => x == "");
+    return Object.values(temp).every((x) => x === "");
   };
 
   /**
@@ -67,10 +67,13 @@ export default function SignIn() {
     });
   };
 
+  //handle submit form
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    //validate values
     if (validate()) {
+      //dispatch action to sign in user
       dispatch(SignInUser({ email: values.email, password: values.password }));
     }
   };

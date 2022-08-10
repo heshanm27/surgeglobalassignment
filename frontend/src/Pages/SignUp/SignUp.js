@@ -12,6 +12,7 @@ import { Paper, Stack } from "@mui/material";
 import { publicRequest } from "../../DefaultAxios/defultaxios";
 import LoadingButton from "@mui/lab/LoadingButton";
 import CustomSnackBar from "../../Component/CustomSnackBar/CustomSnackBar";
+
 const initialValues = {
   email: "",
 };
@@ -30,6 +31,7 @@ export default function SignUp() {
   });
 
   //send signUp request to server
+  //in this function we are sending email then server will send email to that provided with creditional signin
   async function signUp(email) {
     const res = await publicRequest.post(`auth/signUp`, { email });
     return res;
@@ -65,8 +67,10 @@ export default function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
+    //validate values
     if (validate()) {
       try {
+        //send signUp request to server
         await signUp(values.email);
         setValues(initialValues);
         setLoading(false);
