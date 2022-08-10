@@ -21,14 +21,15 @@ const adminInfo = {
 
 async function addAdmin() {
   try {
-    await connectDB(process.env.MONGO_URI);
+    // await connectDB(process.env.MONGO_URI);
     adminInfo.id = (await UserModel.gearateId()) + 1;
     const user = await UserModel.create(adminInfo);
-    mongoose.connection.close();
+    // mongoose.connection.close();
     console.log(user);
   } catch (error) {
     console.log(error);
-    mongoose.connection.close();
+    // mongoose.connection.close();
   }
 }
-addAdmin();
+
+module.exports = addAdmin;

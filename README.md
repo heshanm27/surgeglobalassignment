@@ -48,7 +48,15 @@ Database : MongoDB<br/>
 - mongoose (work with mongodb)
 - nodemailer (send mail) - uuid (generate a random identifier)
 
+**Default Admin Acount**
+
+-There will be default admin account check server/SeedFile/SeedAdmin Path for login details
+
 **Installation**
+
+> Docker Setup
+
+- `docker-compose up`
 
 > Environment variables setup
 
