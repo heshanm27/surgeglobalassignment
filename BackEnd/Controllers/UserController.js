@@ -32,7 +32,7 @@ const getUsersDetails = async (req, res) => {
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit);
-  console.log(users);
+
   usersCount = Math.ceil(usersCount / limit);
   res.status(200).json({ users, usersCount });
 };

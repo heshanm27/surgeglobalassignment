@@ -81,8 +81,6 @@ const signIn = async (req, res) => {
 
 //update new user details
 const updateUserDetailsById = async (req, res) => {
-  console.log(req.body);
-  console.log(req.header);
   const authHeader = req.headers.authorization;
   const token = authHeader.split(" ")[1];
   //update user status
