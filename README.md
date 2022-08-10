@@ -31,6 +31,19 @@ Database : MongoDB<br/>
 
 **Installation**
 
+> Environment variables setup
+
+- `cd BackEnd `(Change directory to the frontend folder)
+
+- Setup .env file in BackEnd directory
+
+**_Environment variables _**
+` MONGO_URI=MongoDb Atlas Url`
+`PORT= Server port `
+`JWT_SECRET= JWT secret `
+`ADMIN_MAIL = email for nodemailer `
+`ADMIN_MAILAPP_PASSWORD = admin email mail password `
+
 > Front End Setup
 
 - `cd frontend `(Change directory to the frontend folder)
