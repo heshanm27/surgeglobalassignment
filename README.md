@@ -57,8 +57,8 @@ Database : MongoDB<br/>
 > Docker Setup
 
 - Install Docker [Check Out This Video](https://www.youtube.com/watch?v=8ev1axl7tgy&list=pl4cuxegkcc9hxjeetdhfnymtcpjnbm3h7&index=2)
-- [Downlaod Node Parent docker image] (https://hub.docker.com/_/node)
-- [Downlaod Mongo Parent docker image] (https://hub.docker.com/_/mongo)
+- [Downlaod Node Parent docker image](https://hub.docker.com/_/node)
+- [Downlaod Mongo Parent docker image](https://hub.docker.com/_/mongo)
 - In the root path, enter the following command:
 - `docker-compose up`
 
