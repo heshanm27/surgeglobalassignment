@@ -3,9 +3,7 @@
 Internship Assignment For the Surge Global
 
 **Project Discription**<br/>
-In this project, users can enter, delete, edit, and search for notes. Also, the admin user can get details about each user's , search for each user.
-
-In this project, both the frontend and backend are created using Mern Stack technologies
+In this project, users can enter, delete, edit, and search for notes. Also, the admin user can get details about each user's , search for each user. In this project, both the frontend and backend are created using Mern Stack technologies. For authentication, use a jwt token. In front-end management, this project uses the Redux state management library.
 
 Backend : Node.Js,ExpressJs<br/>
 Frontend : React.js<br/>
@@ -29,6 +27,26 @@ Database : MongoDB<br/>
 
 - Administrators can view and search all user details on the userlist page.
 
+**Library && Packages**
+
+> FrontEnd
+
+- Axios ( make HTTP requests)
+- framer-motion (for animations)
+- redux-toolkit and redux-presist (state management and persist data)
+- mui (Ui Component)
+
+> BackEnd-ExpressJs (manage routes)
+
+- bcryptjs (encrypt password)
+- cors (cross origin setting configuration)
+- dotenv (environment variable)
+- express-async-errors (handle async errors)
+- http-status-codes (https status codes)
+- jsonwebtoken (jwt token)
+- mongoose (work with mongodb)
+- nodemailer (send mail) - uuid (generate a random identifier)
+
 **Installation**
 
 > Environment variables setup
@@ -38,11 +56,23 @@ Database : MongoDB<br/>
 - Setup .env file in BackEnd directory
 
 **_Environment variables _**
-` MONGO_URI=MongoDb Atlas Url`
-`PORT= Server port `
-`JWT_SECRET= JWT secret `
-`ADMIN_MAIL = email for nodemailer `
-`ADMIN_MAILAPP_PASSWORD = admin email mail password `
+` MONGO_URI=MongoDb Atlas Url`</br>
+`PORT= Server port ` </br>
+`JWT_SECRET= JWT secret ` </br>
+`ADMIN_MAIL = email for nodemailer ` </br>
+`ADMIN_MAILAPP_PASSWORD = admin email mail password ` </br>
+
+**How to get mailApp password in gmail**
+
+- First login into the admin email and go your Google Account
+- Then select security page
+- In Signing to google title
+- You will see app passwords button
+- After click app passwords button it will asks again to login
+- After login you will redirect to page from there
+- Select app as other and enter any custom name
+- After setup name click generate
+- Then it will pop up password for the mailApp
 
 > Front End Setup
 
