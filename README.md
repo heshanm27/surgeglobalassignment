@@ -56,7 +56,8 @@ Database : MongoDB<br/>
 
 - Setup .env file in server directory
 
-**_Environment variables _**
+**_Environment variables _**</br>
+
 ` MONGO_URI=MongoDb Atlas Url`</br>
 `PORT= Server port ` </br>
 `JWT_SECRET= JWT secret ` </br>
@@ -123,14 +124,15 @@ First Jwt combined header, payload, and secret then encrypt after that it will a
 > What is the difference between SQL and NoSQL databases?
 
 - SQL
-- SQL databases are relational
-- used with multi-row transactions
-- save data in table-based
+
+  - SQL databases are relational
+  - used with multi-row transactions
+  - save data in table-based
 
 - NoSQL
-- NoSQL databases are non-relational
-- used with unstructured data like documents or JSON
-- save data in document, key-value pair, graph
+  - NoSQL databases are non-relational
+  - used with unstructured data like documents or JSON
+  - save data in document, key-value pair, graph
 
 > Suggest a good state management for frontend application and explain why you recommend it.
 
