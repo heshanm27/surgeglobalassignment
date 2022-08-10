@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
-import AdminDetails from "../Pages/AdminDetails/AdminDetails";
+import UserList from "../Pages/UserList/UserList";
 import NotFound from "../Pages/NotFound/NotFound";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
-import UserDetails from "../Pages/UserDetails/UserDetails";
+import NotesList from "../Pages/NoteList/NotesList";
 import UserDetailsForm from "../Pages/newUserDetailsForm/UserDetailsForm";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -22,14 +22,8 @@ function App() {
           path="/newuser"
           element={loggedIn ? <SignIn /> : <UserDetailsForm />}
         />
-        <Route
-          path="/admin"
-          element={loggedIn ? <SignIn /> : <AdminDetails />}
-        />
-        <Route
-          path="/user"
-          element={!loggedIn ? <SignIn /> : <UserDetails />}
-        />
+        <Route path="/admin" element={loggedIn ? <SignIn /> : <UserList />} />
+        <Route path="/user" element={!loggedIn ? <SignIn /> : <NotesList />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

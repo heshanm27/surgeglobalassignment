@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import AdminDetails from "../Pages/AdminDetails/AdminDetails";
+import UserList from "../Pages/UserList/UserList";
 import SignIn from "../Pages/SignIn/SignIn";
-import UserDetails from "../Pages/UserDetails/UserDetails";
+import NotesList from "../Pages/NoteList/NotesList";
 import UserDetailsForm from "../Pages/newUserDetailsForm/UserDetailsForm";
 import { useNavigate } from "react-router-dom";
 
@@ -23,10 +23,10 @@ export default function ProtectedRoute() {
   } else if (!userInfo.user.status && userInfo.user.accountType === "admin") {
     //if user is not new and is an admin return to admin details page
     navigate("/admin");
-    return <AdminDetails />;
+    return <UserList />;
   } else if (!userInfo.user.status && userInfo.user.accountType === "user") {
     //if user is not new and is a user return to user details page
     navigate("/user");
-    return <UserDetails />;
+    return <NotesList />;
   }
 }

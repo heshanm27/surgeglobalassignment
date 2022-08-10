@@ -21,7 +21,7 @@ import NavBar from "../../Component/NavBar/NavBar";
 import { publicRequest } from "../../DefaultAxios/defultaxios";
 import { useSelector } from "react-redux";
 import CustomSnackBar from "../../Component/CustomSnackBar/CustomSnackBar";
-export default function AdminDetails() {
+export default function UserList() {
   const [open, setOpen] = useState(false);
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(false);

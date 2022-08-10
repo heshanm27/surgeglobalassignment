@@ -26,7 +26,7 @@ import { useSelector } from "react-redux";
 import NavBar from "../../Component/NavBar/NavBar";
 import CustomSnackBar from "../../Component/CustomSnackBar/CustomSnackBar";
 import CloseIcon from "@mui/icons-material/Close";
-export default function UserDetails() {
+export default function NotesList() {
   const [open, setOpen] = useState(false);
   const [notes, setNotes] = useState(null);
   const [loading, setLoading] = useState(false);
