@@ -39,6 +39,8 @@ UserSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
+
+//bedfore findOneAndUpdate document in mongodb this middleware will be hashed password and store the document in mongodb
 UserSchema.pre("findOneAndUpdate", async function (next) {
   let update = { ...this.getUpdate() };
   const salt = await bcrypt.genSalt(10);
@@ -47,11 +49,13 @@ UserSchema.pre("findOneAndUpdate", async function (next) {
   next();
 });
 
+//compare hash password in database  with user provided password
 UserSchema.methods.validatePassword = async function (enteredPassword) {
   const isValid = await bcrypt.compare(enteredPassword, this.password);
   return isValid;
 };
 
+//create token for user and pass user objectId ,accountType to Jwt token
 UserSchema.methods.gearateJWTToken = function () {
   return jwt.sign(
     { id: this._id, accountType: this.accountType },
@@ -60,6 +64,7 @@ UserSchema.methods.gearateJWTToken = function () {
   );
 };
 
+//return currunt document count in user collection
 UserSchema.statics.gearateId = async function () {
   return this.count();
 };

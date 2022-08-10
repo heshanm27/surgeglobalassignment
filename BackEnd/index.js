@@ -12,6 +12,10 @@ const {
   authenticationUser,
 } = require("./middleware/authentication");
 const cors = require("cors");
+
+//Export MongoDB connect Module
+const connectDB = require("./DataBase/DataBaseConnetion");
+
 //Router moduel imports
 const authRoute = require("./routes/AuthRoute");
 const noteRoute = require("./Routes/NoteRoute");
@@ -24,11 +28,9 @@ const corsOptions = {
   credentials: true,
 };
 
+//middleware configuration
 app.use(express.json());
 app.use(cors(corsOptions));
-
-//Export MongoDB connect Module
-const connectDB = require("./DataBase/DataBaseConnetion");
 
 //default route show message
 app.get("/", (req, res) => res.send("Surge Global Assignment"));

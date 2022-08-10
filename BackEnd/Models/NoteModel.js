@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//Create Note schema
 const NoteSchema = mongoose.Schema(
   {
     title: { type: String, required: [true, "Title is required"] },
@@ -13,4 +14,5 @@ const NoteSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+//Create Note model from schema
 module.exports = mongoose.model("Note", NoteSchema);
