@@ -2,6 +2,10 @@ const { default: mongoose } = require("mongoose");
 const { CustomAPIError } = require("../Errors/errorClases");
 const noteModel = require("../Models/NoteModel");
 
+/**
+ *
+ * @description search note by search query and user who createdby and sort according to createdat date and limit the result according to page and limit
+ */
 const getNotesDetails = async (req, res) => {
   //get query values
   const search = String(req.query.search);
@@ -15,6 +19,7 @@ const getNotesDetails = async (req, res) => {
 
   //get count of all notes
   let notesCount = await noteModel.find({ createdBy: id }).count();
+
   //get all notes and search by title and sort according to user who createdBy
   //and limit the result according to page and limit
   let notes = await noteModel
