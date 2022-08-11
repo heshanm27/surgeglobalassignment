@@ -59,7 +59,7 @@ Database : MongoDB<br/>
 - Install Docker [Check Out This Video](https://www.youtube.com/watch?v=8ev1axl7tgy&list=pl4cuxegkcc9hxjeetdhfnymtcpjnbm3h7&index=2)
 - [Downlaod Node Parent docker image](https://hub.docker.com/_/node)
 - [Downlaod Mongo Parent docker image](https://hub.docker.com/_/mongo)
-- In the root path, enter the following command:
+- In the root path, enter the following command in terminal:
 - `docker-compose up`
 
 > Environment Variables Setup
@@ -80,7 +80,7 @@ Database : MongoDB<br/>
 
 - First login into the admin email and go to your Google Account
 - Then select security page
-- Inside Signing to google title
+- Under Signing to google title
 - You will see app passwords button
 - After click app passwords button it will asks again to login
 - After login you will redirect to page from there
