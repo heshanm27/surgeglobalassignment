@@ -43,7 +43,7 @@ export default function NavBar() {
         <AppBar position="static">
           <Toolbar sx={{ justifyContent: "space-around" }}>
             <Typography variant="h6" noWrap>
-              LOGO
+              Surge Global
             </Typography>
             {/* added character to avatar */}
             <IconButton sx={{ p: 0 }} onClick={handleClick}>
